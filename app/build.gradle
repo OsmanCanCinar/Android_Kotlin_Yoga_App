@@ -1,0 +1,115 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.osmancancinar.yogaapp"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    def lifeCycleExtensionVersion = '2.0.0'
+    def navVersion = '2.3.5'
+    def roomVersion = '2.3.0'
+    def coroutineVersion = '1.5.0'
+    def preferencesVersion = '1.1.1'
+    def designVersion = '1.4.0'
+    def supportVersion = '28.0.0'
+    def glideVersion = '4.9.0'
+    def swipeRefreshVersion = '1.1.0'
+    def adVersion = '20.4.0'
+
+    //Default
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+
+    //Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    //LifeCycles for Implementing MVVM
+    implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"
+
+    //Navigation of fragments
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+
+    //Room for Local Storage
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+
+    //Coroutines for handling threads, database and network operations
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+
+    //Storing data small amounts of data, application wise
+    implementation "androidx.preference:preference-ktx:$preferencesVersion"
+
+    //Design
+    implementation "com.google.android.material:material:$designVersion"
+
+    //Palette
+    implementation "com.android.support:palette-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+
+    //Glide for downloading images
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    //Swipe Refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
+
+    //Google Ads
+    implementation "com.google.android.gms:play-services-ads:$adVersion"
+}
