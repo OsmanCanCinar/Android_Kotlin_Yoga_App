@@ -99,6 +99,7 @@ dependencies {
 
     //Design
     implementation "com.google.android.material:material:$designVersion"
+    api 'com.google.android.material:material:1.1.0-alpha06'
 
     //Palette
     implementation "com.android.support:palette-v7:$supportVersion"
@@ -111,5 +112,5 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
 
     //Google Ads
-    implementation "com.google.android.gms:play-services-ads:$adVersion"
+    //implementation "com.google.android.gms:play-services-ads:$adVersion"
 }
