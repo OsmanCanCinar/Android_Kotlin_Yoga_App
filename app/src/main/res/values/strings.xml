@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">Yoga App</string>
+
+    <!-- Buttons and Labels -->
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="already_have_an_account"><u>Already Have an Account?</u></string>
+    <string name="join_here"><u>Join Here!</u></string>
+    <string name="forget_password"><u>Did you forget your password ?</u></string>
+    <string name="register">Continue</string>
+    <string name="sign_in_options">Sign in options</string>
+    <string name="sign_up_options">Sign up options</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="terms_text">By continuing, you agree to <b>Terms &amp; Conditions</b> and <b>Privacy Policy</b> of the Yoga App</string>
+    <string name="terms">These Terms and Conditions constitute a legally binding agreement made between you,
+                         whether personally or on behalf of an entity (“you”) and [business entity name] (“we,” “us” or “our”),
+                         concerning your access to and use of the [website name.com] website as well as any other media form,
+                         media channel, mobile website or mobile application related, linked, or otherwise connected thereto
+                         (collectively, the “Site”).</string>
+
+    <!-- Hints and Helpers -->
+    <string name="required">Required*</string>
+    <string name="name">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="reset_password">Reset Password</string>
+
+    <!-- Error Messages -->
+    <string name="error_msg_empty">Please fill the empty field(s) to continue</string>
+    <string name="error_msg_name_char">Username must contain at least 3 characters</string>
+    <string name="error_msg_name">Username can only consist of characters</string>
+    <string name="error_msg_email">Invalid Email Address</string>
+    <string name="error_msg_password">Password must include at least 8 characters!</string>
+    <string name="uppercase_error">Password must contain at least 1 Upper-case character</string>
+    <string name="lowercase_error">Password must contain at least 1 Lower-case character</string>
+    <string name="special_case_error">Password must contain at least 1 Special-case character (@#$%^&amp;+)</string>
+    <string name="number_case_error">Password must contain at least 1 number (0–9)</string>
+
 </resources>

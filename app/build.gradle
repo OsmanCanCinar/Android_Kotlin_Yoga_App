@@ -57,7 +57,7 @@ dependencies {
     def supportVersion = '28.0.0'
     def glideVersion = '4.9.0'
     def swipeRefreshVersion = '1.1.0'
-    def adVersion = '20.4.0'
+    //def adVersion = '20.4.0'
 
     //Default
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

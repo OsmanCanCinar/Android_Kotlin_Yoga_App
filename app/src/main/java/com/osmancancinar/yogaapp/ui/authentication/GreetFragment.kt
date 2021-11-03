@@ -14,10 +14,6 @@ class GreetFragment : Fragment() {
     private lateinit var binding: FragmentGreetBinding
     private lateinit var viewModel: GreetVM
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentGreetBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
@@ -26,5 +22,9 @@ class GreetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(GreetVM::class.java)
+
+        binding.buttonEmail.setOnClickListener {
+            viewModel.navigateToEmail(view)
+        }
     }
 }

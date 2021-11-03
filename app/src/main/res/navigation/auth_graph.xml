@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/greetFragment"
         android:name="com.osmancancinar.yogaapp.ui.authentication.GreetFragment"
-        android:label="fragment_greet"
-        tools:layout="@layout/fragment_greet" >
+        android:label=""
+        tools:layout="@layout/fragment_greet">
         <action
             android:id="@+id/action_greetFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -17,19 +17,34 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.osmancancinar.yogaapp.ui.authentication.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
+        android:label=""
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment3"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_resetFragment"
+            app:destination="@id/resetFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.osmancancinar.yogaapp.ui.authentication.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        android:label=""
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment3"
             app:destination="@id/signInFragment" />
-    </fragment><action android:id="@+id/action_global_greetFragment" app:destination="@id/greetFragment"/>
+    </fragment>
+    <action
+        android:id="@+id/action_global_greetFragment"
+        app:destination="@id/greetFragment" />
+    <fragment
+        android:id="@+id/resetFragment"
+        android:name="com.osmancancinar.yogaapp.ui.authentication.ResetFragment"
+        android:label=""
+        tools:layout="@layout/fragment_reset" >
+        <action
+            android:id="@+id/action_resetFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
