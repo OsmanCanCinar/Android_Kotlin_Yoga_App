@@ -23,6 +23,8 @@ class AuthActivity : AppCompatActivity() {
         setTheme(R.style.Theme_YogaApp)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.myToolBar)
+
         viewModel = ViewModelProviders.of(this).get(AuthVM::class.java)
         navController = Navigation.findNavController(this, R.id.fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
@@ -31,5 +33,4 @@ class AuthActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, null)
     }
-
 }

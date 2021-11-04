@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.authentication.GreetFragment">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button2"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/continue_with_e_mail"
+        android:backgroundTint="@color/black"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_baseline_email_24"
+        app:layout_constraintBottom_toTopOf="@id/buttonFacebook"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="e-mail" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonFacebook"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/buttonEmail"
-        app:layout_constraintBottom_toTopOf="@id/button3"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/continue_with_facebook"
+        android:backgroundTint="@color/purple_500"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="facebook" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGoogle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/button2"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="120dp"
+        android:text="@string/continue_with_google"
+        app:cornerRadius="20dp"
+        android:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="google" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

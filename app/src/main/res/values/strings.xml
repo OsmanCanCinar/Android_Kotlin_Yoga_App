@@ -10,6 +10,9 @@
     <string name="register">Continue</string>
     <string name="sign_in_options">Sign in options</string>
     <string name="sign_up_options">Sign up options</string>
+    <string name="continue_with_e_mail">continue with e-mail</string>
+    <string name="continue_with_facebook">continue with facebook</string>
+    <string name="continue_with_google">continue with google</string>
     <string name="dismiss">Dismiss</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="terms_text">By continuing, you agree to <b>Terms &amp; Conditions</b> and <b>Privacy Policy</b> of the Yoga App</string>
@@ -28,6 +31,7 @@
 
     <!-- Error Messages -->
     <string name="error_msg_empty">Please fill the empty field(s) to continue</string>
+    <string name="error_msg">Please fix the faulty field(s) to continue</string>
     <string name="error_msg_name_char">Username must contain at least 3 characters</string>
     <string name="error_msg_name">Username can only consist of characters</string>
     <string name="error_msg_email">Invalid Email Address</string>

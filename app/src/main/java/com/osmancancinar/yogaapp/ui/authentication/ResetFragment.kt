@@ -16,6 +16,7 @@ class ResetFragment : Fragment() {
 
     private lateinit var binding: FragmentResetBinding
     private lateinit var viewModel: ResetVM
+    private var emailFlag: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,9 @@ class ResetFragment : Fragment() {
     private fun checkAndReset(view: View) {
         if (binding.emailTextReset.text.isNullOrEmpty()) {
             Toast.makeText(context, getString(R.string.error_msg_empty), Toast.LENGTH_SHORT).show()
-        } else {
+        } else if(emailFlag) {
+            Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
+        } else{
             viewModel.resetPassword(view)
         }
     }
@@ -51,6 +54,10 @@ class ResetFragment : Fragment() {
             binding.emailTextInputLayoutReset.apply {
                 helperText = viewModel.validateEmail(txt)
                 error = viewModel.validateEmail(txt)
+                emailFlag = false
+                if (!error.isNullOrEmpty()) {
+                    emailFlag = true
+                }
             }
         }
 
@@ -59,7 +66,23 @@ class ResetFragment : Fragment() {
                 binding.emailTextInputLayoutReset.apply {
                     helperText = getString(R.string.required)
                     error = null
+                    emailFlag = false
                 }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setInitialSetUp()
+    }
+
+    private fun setInitialSetUp() {
+        binding.apply {
+            emailTextInputLayoutReset.apply {
+                helperText = getString(R.string.required)
+                error = null
+                emailFlag = false
             }
         }
     }

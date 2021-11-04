@@ -16,6 +16,9 @@ class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: SignUpVM
+    private var nameFlag: Boolean = false
+    private var emailFlag: Boolean = false
+    private var passwordFlag: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSignUpBinding.inflate(LayoutInflater.from(context), container, false)
@@ -52,6 +55,8 @@ class SignUpFragment : Fragment() {
             binding.passwordText.text.isNullOrEmpty()
         ) {
             Toast.makeText(context, getString(R.string.error_msg_empty), Toast.LENGTH_SHORT).show()
+        } else if(nameFlag || emailFlag || passwordFlag) {
+            Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
         } else {
             viewModel.signUp(requireActivity())
         }
@@ -68,16 +73,19 @@ class SignUpFragment : Fragment() {
             nameTextInputLayout.apply {
                 helperText = getString(R.string.required)
                 error = null
+                nameFlag = false
             }
 
             emailTextInputLayout.apply {
                 helperText = getString(R.string.required)
                 error = null
+                emailFlag = false
             }
 
             passwordTextInputLayout.apply {
                 helperText = getString(R.string.required)
                 error = null
+                passwordFlag = false
             }
         }
     }
@@ -94,6 +102,10 @@ class SignUpFragment : Fragment() {
             binding.emailTextInputLayout.apply {
                 helperText = viewModel.validateEmail(txt)
                 error = viewModel.validateEmail(txt)
+                emailFlag = false
+                if (!error.isNullOrEmpty()) {
+                    emailFlag = true
+                }
             }
         }
 
@@ -102,6 +114,7 @@ class SignUpFragment : Fragment() {
                 binding.emailTextInputLayout.apply {
                     helperText = getString(R.string.required)
                     error = null
+                    emailFlag = false
                 }
             }
         }
@@ -113,6 +126,10 @@ class SignUpFragment : Fragment() {
             binding.nameTextInputLayout.apply {
                 helperText = viewModel.validateName(txt)
                 error = viewModel.validateName(txt)
+                nameFlag = false
+                if (!error.isNullOrEmpty()) {
+                    nameFlag = true
+                }
             }
         }
 
@@ -121,6 +138,7 @@ class SignUpFragment : Fragment() {
                 binding.nameTextInputLayout.apply {
                     helperText = getString(R.string.required)
                     error = null
+                    nameFlag = false
                 }
             }
         }
@@ -132,6 +150,10 @@ class SignUpFragment : Fragment() {
             binding.passwordTextInputLayout.apply {
                 helperText = viewModel.validatePassword(txt)
                 error = viewModel.validatePassword(txt)
+                passwordFlag = false
+                if (!error.isNullOrEmpty()) {
+                    passwordFlag = true
+                }
             }
         }
 
@@ -140,6 +162,7 @@ class SignUpFragment : Fragment() {
                 binding.passwordTextInputLayout.apply {
                     helperText = getString(R.string.required)
                     error = null
+                    passwordFlag = false
                 }
             }
         }

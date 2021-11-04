@@ -98,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in_options"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toStartOf="@id/buttonSignIn"
         app:layout_constraintStart_toStartOf="@id/passwordTextInputLayoutSignIn"
         app:layout_constraintTop_toTopOf="@id/buttonSignIn" />
@@ -106,6 +107,8 @@
         android:id="@+id/buttonSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:cornerRadius="20dp"
+        android:backgroundTint="@color/black"
         android:layout_marginTop="50dp"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayoutSignIn"
