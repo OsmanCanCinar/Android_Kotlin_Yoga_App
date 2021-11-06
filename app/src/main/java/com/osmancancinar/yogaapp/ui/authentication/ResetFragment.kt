@@ -9,6 +9,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentResetBinding
 import com.osmancancinar.yogaapp.viewModels.auth.ResetVM
@@ -17,13 +18,19 @@ class ResetFragment : Fragment() {
 
     private lateinit var binding: FragmentResetBinding
     private lateinit var viewModel: ResetVM
+    private lateinit var auth: FirebaseAuth
     private var emailFlag: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentResetBinding.inflate(LayoutInflater.from(context),container,false)
+        binding = FragmentResetBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
 
@@ -35,16 +42,16 @@ class ResetFragment : Fragment() {
         emailClickHandler()
 
         binding.resetButton.setOnClickListener {
-           checkAndReset(view)
+            checkAndReset(view)
         }
     }
 
     private fun checkAndReset(view: View) {
         if (binding.emailTextReset.text.isNullOrEmpty()) {
             Toast.makeText(context, getString(R.string.error_msg_empty), Toast.LENGTH_SHORT).show()
-        } else if(emailFlag) {
+        } else if (emailFlag) {
             Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
-        } else{
+        } else {
             resetPassword(view)
         }
     }
@@ -88,10 +95,14 @@ class ResetFragment : Fragment() {
         }
     }
 
-    fun resetPassword(view: View) {
-        //after successfully resetting the password
+    private fun resetPassword(view: View) {
+        val email = binding.emailTextReset.text.toString()
+        auth.sendPasswordResetEmail(email).addOnSuccessListener {
+            Toast.makeText(context,getString(R.string.reset_text),Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(context,it.localizedMessage,Toast.LENGTH_SHORT).show()
+        }
         val actionToSignIn = ResetFragmentDirections.actionResetFragmentToSignInFragment()
         Navigation.findNavController(view).navigate(actionToSignIn)
     }
-
 }

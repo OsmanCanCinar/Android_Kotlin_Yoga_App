@@ -48,6 +48,7 @@ android {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     def lifeCycleExtensionVersion = '2.0.0'
     def navVersion = '2.3.5'
     def roomVersion = '2.3.0'
@@ -77,6 +78,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
     //LifeCycles for Implementing MVVM
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"

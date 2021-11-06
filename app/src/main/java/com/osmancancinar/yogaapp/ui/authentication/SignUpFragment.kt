@@ -1,9 +1,11 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignUpBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
@@ -22,9 +28,18 @@ class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: SignUpVM
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseFirestore
     private var nameFlag: Boolean = false
     private var emailFlag: Boolean = false
     private var passwordFlag: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseFirestore.getInstance()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSignUpBinding.inflate(LayoutInflater.from(context), container, false)
@@ -66,6 +81,40 @@ class SignUpFragment : Fragment() {
         } else {
             signUp(requireActivity())
         }
+    }
+
+    private fun signUp(activity: Activity) {
+        val email = binding.emailText.text.toString()
+        val password = binding.passwordText.text.toString()
+
+        auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
+            Toast.makeText(context,getString(R.string.successful_msg),Toast.LENGTH_LONG).show()
+            addToDatabase()
+            val intent = Intent(activity, HomeActivity::class.java)
+            activity.startActivity(intent)
+            activity.finish()
+        }.addOnFailureListener {
+            Toast.makeText(context,it.localizedMessage,Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun addToDatabase() {
+        val email = binding.emailText.text.toString()
+        val username = binding.nameText.text.toString()
+
+        val user = hashMapOf (
+            "userEmail" to email,
+            "userName" to username
+        )
+
+        database.collection("users")
+            .add(user)
+            .addOnSuccessListener {
+                Log.d(TAG, "DocumentSnapshot added with ID: ${it.id}")
+            }
+            .addOnFailureListener {
+                Log.w(TAG, "Error adding document", it)
+            }
     }
 
     override fun onResume() {
@@ -174,27 +223,21 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    fun navigateToSignIn(view: View) {
+    private fun navigateToSignIn(view: View) {
         val actionToSignIn = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment3()
         Navigation.findNavController(view).navigate(actionToSignIn)
     }
 
-    fun goBackToOptions(view: View) {
+    private fun goBackToOptions(view: View) {
         val actionToOptions = SignUpFragmentDirections.actionGlobalGreetFragment()
         Navigation.findNavController(view).navigate(actionToOptions)
     }
 
-    fun showDialog() {
+    private fun showDialog() {
             AlertDialog.Builder(requireContext())
                 .setTitle(R.string.terms_and_conditions)
                 .setMessage(R.string.terms)
                 .setPositiveButton(R.string.dismiss) { _, _ -> }
                 .show()
-    }
-
-    fun signUp(activity: Activity) {
-        val intent = Intent(activity, HomeActivity::class.java)
-        activity.startActivity(intent)
-        activity.finish()
     }
 }

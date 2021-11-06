@@ -49,5 +49,7 @@
     <string name="special_case_error">Password must contain at least 1 Special-case character (@#$%^&amp;+)</string>
     <string name="number_case_error">Password must contain at least 1 number (0–9)</string>
     <string name="feature">This feature will be added soon</string>
+    <string name="successful_msg">User created successfully</string>
+    <string name="reset_text">Reset link is sent to your email</string>
 
 </resources>

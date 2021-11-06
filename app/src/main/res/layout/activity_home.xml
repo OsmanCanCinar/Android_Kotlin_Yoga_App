@@ -31,8 +31,8 @@
                 android:layout_margin="4dp"
                 android:background="@drawable/tool_bar_style"
                 android:elevation="3dp"
-                app:title="Drawer"
                 app:titleTextColor="@color/white" />
+
 
         </com.google.android.material.appbar.AppBarLayout>
 

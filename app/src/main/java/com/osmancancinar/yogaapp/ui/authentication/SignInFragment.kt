@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignInBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
@@ -19,6 +20,12 @@ class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: SignInVM
+    private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSignInBinding.inflate(LayoutInflater.from(context), container, false)
@@ -52,27 +59,35 @@ class SignInFragment : Fragment() {
         ) {
             Toast.makeText(context, getString(R.string.error_msg_empty), Toast.LENGTH_SHORT).show()
         } else {
-            signIn(requireActivity())
+            val email = binding.emailTextSignIn.text.toString()
+            val password = binding.passwordTextSignIn.text.toString()
+
+            auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
+                signIn(requireActivity())
+            }.addOnFailureListener {
+                //Change this later
+                Toast.makeText(context,it.localizedMessage,Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    fun navigateToSignUp(view: View) {
+    private fun navigateToSignUp(view: View) {
         val actionToSignUp = SignInFragmentDirections.actionSignInFragmentToSignUpFragment3()
         Navigation.findNavController(view).navigate(actionToSignUp)
     }
 
-    fun goBackToOptions(view: View) {
+    private fun goBackToOptions(view: View) {
         val actionToOptions = SignInFragmentDirections.actionGlobalGreetFragment()
         Navigation.findNavController(view).navigate(actionToOptions)
     }
 
-    fun signIn(activity: Activity) {
+    private fun signIn(activity: Activity) {
         val intent = Intent(activity, HomeActivity::class.java)
         activity.startActivity(intent)
         activity.finish()
     }
 
-    fun resetPassword(view: View) {
+    private fun resetPassword(view: View) {
         val actionToResetPassword = SignInFragmentDirections.actionSignInFragmentToResetFragment()
         Navigation.findNavController(view).navigate(actionToResetPassword)
     }
