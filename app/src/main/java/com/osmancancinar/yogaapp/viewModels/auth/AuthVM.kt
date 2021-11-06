@@ -1,7 +1,6 @@
 package com.osmancancinar.yogaapp.viewModels.auth
 
-import android.app.Application
-import com.osmancancinar.yogaapp.viewModels.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class AuthVM(private val app : Application) : BaseViewModel(app) {
+class AuthVM() : ViewModel() {
 }

@@ -21,13 +21,14 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:minHeight="?attr/actionBarSize" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/auth_graph"
         app:layout_constraintStart_toStartOf="parent"

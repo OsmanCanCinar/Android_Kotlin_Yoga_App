@@ -21,6 +21,14 @@
                          concerning your access to and use of the [website name.com] website as well as any other media form,
                          media channel, mobile website or mobile application related, linked, or otherwise connected thereto
                          (collectively, the “Site”).</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="meditation">Meditation</string>
+    <string name="yoga">Yoga</string>
+    <string name="blog">Blog</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
 
     <!-- Hints and Helpers -->
     <string name="required">Required*</string>
@@ -40,5 +48,6 @@
     <string name="lowercase_error">Password must contain at least 1 Lower-case character</string>
     <string name="special_case_error">Password must contain at least 1 Special-case character (@#$%^&amp;+)</string>
     <string name="number_case_error">Password must contain at least 1 number (0–9)</string>
+    <string name="feature">This feature will be added soon</string>
 
 </resources>

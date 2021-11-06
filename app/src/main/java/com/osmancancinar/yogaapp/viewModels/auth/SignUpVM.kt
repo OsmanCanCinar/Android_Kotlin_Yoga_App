@@ -1,39 +1,11 @@
 package com.osmancancinar.yogaapp.viewModels.auth
 
-import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.content.Intent
 import android.util.Patterns
-import android.view.View
-import androidx.appcompat.app.AlertDialog
-import androidx.navigation.Navigation
 import com.osmancancinar.yogaapp.R
-import com.osmancancinar.yogaapp.ui.authentication.SignUpFragmentDirections
-import com.osmancancinar.yogaapp.ui.home.HomeActivity
 import com.osmancancinar.yogaapp.viewModels.BaseViewModel
 
 class SignUpVM(private val app: Application) : BaseViewModel(app) {
-
-    fun navigateToSignIn(view: View) {
-        val actionToSignIn = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment3()
-        Navigation.findNavController(view).navigate(actionToSignIn)
-    }
-
-    fun goBackToOptions(view: View) {
-        val actionToOptions = SignUpFragmentDirections.actionGlobalGreetFragment()
-        Navigation.findNavController(view).navigate(actionToOptions)
-    }
-
-    fun showDialog(context: Context) {
-        context.let {
-            AlertDialog.Builder(it)
-                .setTitle(R.string.terms_and_conditions)
-                .setMessage(R.string.terms)
-                .setPositiveButton(R.string.dismiss) { _, _ -> }
-                .show()
-        }
-    }
 
     fun validateEmail(email: String): String? {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -73,9 +45,4 @@ class SignUpVM(private val app: Application) : BaseViewModel(app) {
         else return null
     }
 
-    fun signUp(activity: Activity) {
-        val intent = Intent(activity, HomeActivity::class.java)
-        activity.startActivity(intent)
-        activity.finish()
-    }
 }

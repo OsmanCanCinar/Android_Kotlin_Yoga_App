@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentGreetBinding
 import com.osmancancinar.yogaapp.viewModels.auth.GreetVM
 
@@ -24,7 +27,28 @@ class GreetFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(GreetVM::class.java)
 
         binding.buttonEmail.setOnClickListener {
-            viewModel.navigateToEmail(view)
+            navigateToEmail(view)
         }
+
+        binding.buttonFacebook.setOnClickListener {
+            navigateToFacebook()
+        }
+
+        binding.buttonGoogle.setOnClickListener {
+            navigateToGoogle()
+        }
+    }
+
+    fun navigateToEmail(view : View) {
+        val action = GreetFragmentDirections.actionGreetFragmentToSignUpFragment()
+        Navigation.findNavController(view).navigate(action)
+    }
+
+    fun navigateToFacebook() {
+        Toast.makeText(context,getString(R.string.feature), Toast.LENGTH_SHORT).show()
+    }
+
+    fun navigateToGoogle() {
+        Toast.makeText(context,getString(R.string.feature), Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,5 +1,7 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignInBinding
+import com.osmancancinar.yogaapp.ui.home.HomeActivity
 import com.osmancancinar.yogaapp.viewModels.auth.SignInVM
 
 class SignInFragment : Fragment() {
@@ -26,11 +30,11 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(SignInVM::class.java)
 
         binding.goToSignUpText.setOnClickListener {
-            viewModel.navigateToSignUp(view)
+            navigateToSignUp(view)
         }
 
         binding.backToOptionsButtonSignIn.setOnClickListener {
-            viewModel.goBackToOptions(view)
+            goBackToOptions(view)
         }
 
         binding.buttonSignIn.setOnClickListener {
@@ -38,7 +42,7 @@ class SignInFragment : Fragment() {
         }
 
         binding.forgetPasswordText.setOnClickListener {
-            viewModel.resetPassword(view)
+            resetPassword(view)
         }
     }
 
@@ -48,7 +52,28 @@ class SignInFragment : Fragment() {
         ) {
             Toast.makeText(context, getString(R.string.error_msg_empty), Toast.LENGTH_SHORT).show()
         } else {
-            viewModel.signIn(requireActivity())
+            signIn(requireActivity())
         }
+    }
+
+    fun navigateToSignUp(view: View) {
+        val actionToSignUp = SignInFragmentDirections.actionSignInFragmentToSignUpFragment3()
+        Navigation.findNavController(view).navigate(actionToSignUp)
+    }
+
+    fun goBackToOptions(view: View) {
+        val actionToOptions = SignInFragmentDirections.actionGlobalGreetFragment()
+        Navigation.findNavController(view).navigate(actionToOptions)
+    }
+
+    fun signIn(activity: Activity) {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity.startActivity(intent)
+        activity.finish()
+    }
+
+    fun resetPassword(view: View) {
+        val actionToResetPassword = SignInFragmentDirections.actionSignInFragmentToResetFragment()
+        Navigation.findNavController(view).navigate(actionToResetPassword)
     }
 }

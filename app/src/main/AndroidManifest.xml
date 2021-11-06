@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme">
-        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.authentication.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

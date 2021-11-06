@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentResetBinding
 import com.osmancancinar.yogaapp.viewModels.auth.ResetVM
@@ -44,7 +45,7 @@ class ResetFragment : Fragment() {
         } else if(emailFlag) {
             Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
         } else{
-            viewModel.resetPassword(view)
+            resetPassword(view)
         }
     }
 
@@ -86,4 +87,11 @@ class ResetFragment : Fragment() {
             }
         }
     }
+
+    fun resetPassword(view: View) {
+        //after successfully resetting the password
+        val actionToSignIn = ResetFragmentDirections.actionResetFragmentToSignInFragment()
+        Navigation.findNavController(view).navigate(actionToSignIn)
+    }
+
 }

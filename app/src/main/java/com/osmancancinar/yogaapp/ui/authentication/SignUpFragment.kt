@@ -1,15 +1,21 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignUpBinding
+import com.osmancancinar.yogaapp.ui.home.HomeActivity
 import com.osmancancinar.yogaapp.viewModels.auth.SignUpVM
 
 class SignUpFragment : Fragment() {
@@ -31,7 +37,7 @@ class SignUpFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(SignUpVM::class.java)
 
         binding.goToSignInText.setOnClickListener {
-            viewModel.navigateToSignIn(it)
+            navigateToSignIn(it)
         }
 
         clickHandler()
@@ -41,11 +47,11 @@ class SignUpFragment : Fragment() {
         }
 
         binding.backToOptionsButton.setOnClickListener {
-            viewModel.goBackToOptions(view)
+            goBackToOptions(view)
         }
 
         binding.termsAndConditionsText.setOnClickListener {
-            viewModel.showDialog(requireContext())
+           showDialog()
         }
     }
 
@@ -58,7 +64,7 @@ class SignUpFragment : Fragment() {
         } else if(nameFlag || emailFlag || passwordFlag) {
             Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
         } else {
-            viewModel.signUp(requireActivity())
+            signUp(requireActivity())
         }
     }
 
@@ -166,5 +172,29 @@ class SignUpFragment : Fragment() {
                 }
             }
         }
+    }
+
+    fun navigateToSignIn(view: View) {
+        val actionToSignIn = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment3()
+        Navigation.findNavController(view).navigate(actionToSignIn)
+    }
+
+    fun goBackToOptions(view: View) {
+        val actionToOptions = SignUpFragmentDirections.actionGlobalGreetFragment()
+        Navigation.findNavController(view).navigate(actionToOptions)
+    }
+
+    fun showDialog() {
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.terms_and_conditions)
+                .setMessage(R.string.terms)
+                .setPositiveButton(R.string.dismiss) { _, _ -> }
+                .show()
+    }
+
+    fun signUp(activity: Activity) {
+        val intent = Intent(activity, HomeActivity::class.java)
+        activity.startActivity(intent)
+        activity.finish()
     }
 }
