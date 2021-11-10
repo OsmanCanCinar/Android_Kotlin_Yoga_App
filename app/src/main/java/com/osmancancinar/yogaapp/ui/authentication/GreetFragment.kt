@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -27,7 +28,7 @@ import com.osmancancinar.yogaapp.viewModels.auth.GreetVM
 class GreetFragment : Fragment() {
 
     companion object {
-        private const val RC_SIGN_IN = 120
+        private const val RC_SIGN_IN = 120 // Request Code
     }
 
     private lateinit var binding: FragmentGreetBinding
@@ -43,7 +44,7 @@ class GreetFragment : Fragment() {
         database = FirebaseFirestore.getInstance()
 
         if (auth.currentUser != null) {
-            signIn(requireActivity())
+            signIn()
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -51,14 +52,10 @@ class GreetFragment : Fragment() {
             .requestEmail()
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentGreetBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
@@ -75,8 +72,8 @@ class GreetFragment : Fragment() {
             navigateToFacebook()
         }
 
-        binding.buttonGoogle.setOnClickListener {
-            navigateToGoogle()
+        binding.buttonGoogle.setOnClickListener { _ ->
+            signInWithGoogle()
         }
     }
 
@@ -89,15 +86,30 @@ class GreetFragment : Fragment() {
         Toast.makeText(context, getString(R.string.feature), Toast.LENGTH_SHORT).show()
     }
 
-    private fun navigateToGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+    private fun signIn() {
+        val intent = Intent(requireActivity(), HomeActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
-    private fun signIn(activity: Activity) {
-        val intent = Intent(activity, HomeActivity::class.java)
-        activity.startActivity(intent)
-        activity.finish()
+    private fun signInWithGoogle() {
+        googleSignInClient.signOut()
+        val signInIntent = googleSignInClient.signInIntent
+        //startActivityForResult(signInIntent, RC_SIGN_IN)
+        resultLauncher.launch(signInIntent)
+    }
+
+    private var resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                Log.w(TAG, "Google sign in failed", e)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -105,69 +117,63 @@ class GreetFragment : Fragment() {
 
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val exception = task.exception
-            if (task.isSuccessful) {
-                try {
-                    val account = task.getResult(ApiException::class.java)!!
-                    Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
-                    firebaseAuthWithGoogle(account.idToken!!, requireActivity())
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
                     Log.w(TAG, "Google sign in failed", e)
                 }
-            } else {
-                Log.w(TAG, exception.toString())
-            }
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String, activity: Activity) {
+    private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
-            if (task.isSuccessful) {
-
-                val currentUser = auth.currentUser
-                val email = currentUser?.email
-                val username = currentUser?.displayName
-
-                database.collection("users").whereEqualTo("userEmail", email)
-                    .addSnapshotListener { value, e ->
-                        if (e != null) {
-                            return@addSnapshotListener
-                        }
-
-                        val users = ArrayList<String>()
-
-                        for (doc in value!!) {
-                            doc.getString("userEmail")?.let {
-                                users.add(it)
-                            }
-                        }
-
-                        if(users.contains(email)) {
-                            println("sign in")
-                        } else {
-                            println("sign up")
-
-                            val user = hashMapOf(
-                                "userName" to username,
-                                "userEmail" to email
-                            )
-
-                            database.collection("users")
-                                .add(user)
-                                .addOnSuccessListener {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: ${it.id}")
-                                }
-                                .addOnFailureListener {
-                                    Log.w(TAG, "Error adding document", it)
-                                }
-                        }
-                    }
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    val currentUser = auth.currentUser
+                    val email = currentUser?.email
+                    val username = currentUser?.displayName
+                    addToDb(email, username)
+                    signIn()
+                } else {
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                }
             }
+    }
 
-            val intent = Intent(activity, HomeActivity::class.java)
-            startActivity(intent)
-            activity.finish()
-        }
+    private fun addToDb(email: String?, username: String?) {
+        database.collection("users")
+            .whereEqualTo("userEmail", email)
+            .addSnapshotListener { value, e ->
+                if (e != null) { return@addSnapshotListener }
+
+                val users = ArrayList<String>()
+
+                for (doc in value!!) {
+                    doc.getString("userEmail")?.let {
+                        users.add(it)
+                    }
+                }
+
+                if (users.contains(email)) {
+                    println("Welcome back!")
+                } else {
+                    println("Welcome!")
+                    val user = hashMapOf(
+                        "userName" to username,
+                        "userEmail" to email
+                    )
+
+                    database.collection("users")
+                        .add(user)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "DocumentSnapshot added with ID: ${it.id}")
+                        }
+                        .addOnFailureListener {
+                            Log.w(TAG, "Error adding document", it)
+                        }
+                }
+            }
     }
 }
