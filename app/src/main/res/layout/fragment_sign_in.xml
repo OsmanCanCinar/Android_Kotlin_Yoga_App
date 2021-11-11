@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,11 +27,11 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
         android:hint="@string/email"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
         app:helperTextTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signInText">
+        app:layout_constraintTop_toBottomOf="@id/signInText"
+        app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailTextSignIn"
@@ -50,12 +49,12 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
         android:hint="@string/password"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:helperTextTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailTextInputLayoutSignIn"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordTextSignIn"
@@ -107,10 +106,10 @@
         android:id="@+id/buttonSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cornerRadius="20dp"
-        android:backgroundTint="@color/black"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/black"
         android:text="@string/register"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayoutSignIn"
         app:layout_constraintStart_toEndOf="@id/backToOptionsButtonSignIn"
         app:layout_constraintTop_toBottomOf="@id/forgetPasswordText" />

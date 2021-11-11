@@ -1,22 +1,27 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,7 +33,7 @@ import com.osmancancinar.yogaapp.viewModels.auth.GreetVM
 class GreetFragment : Fragment() {
 
     companion object {
-        private const val RC_SIGN_IN = 120 // Request Code
+        private const val TAG = "FacebookLogin"
     }
 
     private lateinit var binding: FragmentGreetBinding
@@ -36,12 +41,14 @@ class GreetFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
+        callbackManager = CallbackManager.Factory.create()
 
         if (auth.currentUser != null) {
             signIn()
@@ -55,7 +62,11 @@ class GreetFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentGreetBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
@@ -68,8 +79,13 @@ class GreetFragment : Fragment() {
             navigateToEmail(view)
         }
 
-        binding.buttonFacebook.setOnClickListener {
+        binding.loginButton.setOnClickListener {
+            LoginManager.getInstance().logOut()
             navigateToFacebook()
+        }
+
+        binding.buttonFacebook.setOnClickListener {
+            binding.loginButton.performClick()
         }
 
         binding.buttonGoogle.setOnClickListener { _ ->
@@ -83,7 +99,23 @@ class GreetFragment : Fragment() {
     }
 
     private fun navigateToFacebook() {
-        Toast.makeText(context, getString(R.string.feature), Toast.LENGTH_SHORT).show()
+        binding.loginButton.setPermissions("email", "public_profile")
+        binding.loginButton.registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    Log.d(TAG, "facebook:onSuccess:$loginResult")
+                    handleFacebookAccessToken(loginResult.accessToken)
+                }
+
+                override fun onCancel() {
+                    Log.d(TAG, "facebook:onCancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d(TAG, "facebook:onError", error)
+                }
+            })
     }
 
     private fun signIn() {
@@ -95,35 +127,42 @@ class GreetFragment : Fragment() {
     private fun signInWithGoogle() {
         googleSignInClient.signOut()
         val signInIntent = googleSignInClient.signInIntent
-        //startActivityForResult(signInIntent, RC_SIGN_IN)
         resultLauncher.launch(signInIntent)
-    }
-
-    private var resultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                Log.w(TAG, "Google sign in failed", e)
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
 
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
                     Log.w(TAG, "Google sign in failed", e)
                 }
+            }
         }
+
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = auth.currentUser
+                    val email = user?.email
+                    val username = user?.displayName
+                    viewModel.addToDb(email, username, database)
+                    signIn()
+                } else {
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                }
+            }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -134,45 +173,10 @@ class GreetFragment : Fragment() {
                     val currentUser = auth.currentUser
                     val email = currentUser?.email
                     val username = currentUser?.displayName
-                    addToDb(email, username)
+                    viewModel.addToDb(email, username, database)
                     signIn()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                }
-            }
-    }
-
-    private fun addToDb(email: String?, username: String?) {
-        database.collection("users")
-            .whereEqualTo("userEmail", email)
-            .addSnapshotListener { value, e ->
-                if (e != null) { return@addSnapshotListener }
-
-                val users = ArrayList<String>()
-
-                for (doc in value!!) {
-                    doc.getString("userEmail")?.let {
-                        users.add(it)
-                    }
-                }
-
-                if (users.contains(email)) {
-                    println("Welcome back!")
-                } else {
-                    println("Welcome!")
-                    val user = hashMapOf(
-                        "userName" to username,
-                        "userEmail" to email
-                    )
-
-                    database.collection("users")
-                        .add(user)
-                        .addOnSuccessListener {
-                            Log.d(TAG, "DocumentSnapshot added with ID: ${it.id}")
-                        }
-                        .addOnFailureListener {
-                            Log.w(TAG, "Error adding document", it)
-                        }
                 }
             }
     }

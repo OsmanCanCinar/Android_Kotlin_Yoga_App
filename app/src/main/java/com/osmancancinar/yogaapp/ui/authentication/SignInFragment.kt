@@ -27,7 +27,11 @@ class SignInFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSignInBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
@@ -62,11 +66,11 @@ class SignInFragment : Fragment() {
             val email = binding.emailTextSignIn.text.toString()
             val password = binding.passwordTextSignIn.text.toString()
 
-            auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
+            auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
                 signIn(requireActivity())
             }.addOnFailureListener {
                 //Change this later
-                Toast.makeText(context,it.localizedMessage,Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
             }
         }
     }

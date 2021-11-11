@@ -10,9 +10,9 @@
     <string name="register">Continue</string>
     <string name="sign_in_options">Sign in options</string>
     <string name="sign_up_options">Sign up options</string>
-    <string name="continue_with_e_mail">continue with e-mail</string>
-    <string name="continue_with_facebook">continue with facebook</string>
-    <string name="continue_with_google">continue with google</string>
+    <string name="continue_with_e_mail">Continue with Email</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_with_google">Continue with Google</string>
     <string name="dismiss">Dismiss</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="terms_text">By continuing, you agree to <b>Terms &amp; Conditions</b> and <b>Privacy Policy</b> of the Yoga App</string>
@@ -51,5 +51,8 @@
     <string name="feature">This feature will be added soon</string>
     <string name="successful_msg">User created successfully</string>
     <string name="reset_text">Reset link is sent to your email</string>
+
+    <string name="facebook_app_id">171553195189147</string>
+    <string name="fb_login_protocol_scheme">fb171553195189147</string>
 
 </resources>

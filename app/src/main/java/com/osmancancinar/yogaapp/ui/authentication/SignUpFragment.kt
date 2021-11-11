@@ -1,10 +1,8 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +36,11 @@ class SignUpFragment : Fragment() {
         database = FirebaseFirestore.getInstance()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSignUpBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
@@ -63,7 +65,7 @@ class SignUpFragment : Fragment() {
         }
 
         binding.termsAndConditionsText.setOnClickListener {
-           showDialog()
+            showDialog()
         }
     }
 
@@ -73,7 +75,7 @@ class SignUpFragment : Fragment() {
             binding.passwordText.text.isNullOrEmpty()
         ) {
             Toast.makeText(context, getString(R.string.error_msg_empty), Toast.LENGTH_SHORT).show()
-        } else if(nameFlag || emailFlag || passwordFlag) {
+        } else if (nameFlag || emailFlag || passwordFlag) {
             Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
         } else {
             signUp(requireActivity())
@@ -82,36 +84,18 @@ class SignUpFragment : Fragment() {
 
     private fun signUp(activity: Activity) {
         val email = binding.emailText.text.toString()
+        val username = binding.nameText.text.toString()
         val password = binding.passwordText.text.toString()
 
-        auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener {
-            Toast.makeText(context,getString(R.string.successful_msg),Toast.LENGTH_LONG).show()
-            addToDatabase()
+        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
+            Toast.makeText(context, getString(R.string.successful_msg), Toast.LENGTH_LONG).show()
+            viewModel.addToDatabase(email, username, database)
             val intent = Intent(activity, HomeActivity::class.java)
             activity.startActivity(intent)
             activity.finish()
         }.addOnFailureListener {
-            Toast.makeText(context,it.localizedMessage,Toast.LENGTH_LONG).show()
+            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
         }
-    }
-
-    private fun addToDatabase() {
-        val email = binding.emailText.text.toString()
-        val username = binding.nameText.text.toString()
-
-        val user = hashMapOf (
-            "userEmail" to email,
-            "userName" to username
-        )
-
-        database.collection("users")
-            .add(user)
-            .addOnSuccessListener {
-                Log.d(TAG, "DocumentSnapshot added with ID: ${it.id}")
-            }
-            .addOnFailureListener {
-                Log.w(TAG, "Error adding document", it)
-            }
     }
 
     override fun onResume() {
@@ -231,10 +215,10 @@ class SignUpFragment : Fragment() {
     }
 
     private fun showDialog() {
-            AlertDialog.Builder(requireContext())
-                .setTitle(R.string.terms_and_conditions)
-                .setMessage(R.string.terms)
-                .setPositiveButton(R.string.dismiss) { _, _ -> }
-                .show()
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.terms_and_conditions)
+            .setMessage(R.string.terms)
+            .setPositiveButton(R.string.dismiss) { _, _ -> }
+            .show()
     }
 }

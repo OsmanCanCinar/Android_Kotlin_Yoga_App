@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.authentication.SignUpFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.authentication.SignUpFragment">
 
     <TextView
         android:id="@+id/signUpText"
@@ -30,12 +29,12 @@
         app:counterEnabled="true"
         app:counterMaxLength="16"
         app:helperText="@string/required"
-        app:startIconDrawable="@drawable/ic_baseline_person_24"
         app:helperTextTextColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/emailTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUpText">
+        app:layout_constraintTop_toBottomOf="@id/signUpText"
+        app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameText"
@@ -54,12 +53,12 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
         android:hint="@string/email"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
         app:helperText="@string/required"
         app:helperTextTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout">
+        app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout"
+        app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailText"
@@ -77,7 +76,6 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
         android:hint="@string/password"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:counterEnabled="true"
         app:counterMaxLength="16"
         app:helperText="@string/required"
@@ -85,7 +83,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailTextInputLayout"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordText"
@@ -125,9 +124,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/black"
         android:text="@string/register"
         app:cornerRadius="20dp"
-        android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayout"
         app:layout_constraintStart_toEndOf="@id/backToOptionsButton"
         app:layout_constraintTop_toBottomOf="@id/goToSignInText" />
@@ -136,14 +135,14 @@
         android:id="@+id/termsAndConditionsText"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@id/passwordTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="@string/terms_text"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="@string/terms_text"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordTextInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

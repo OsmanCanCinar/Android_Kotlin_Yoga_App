@@ -50,10 +50,11 @@ dependencies {
 
     def lifeCycleExtensionVersion = '2.0.0'
     def navVersion = '2.3.5'
+    def designVersion = '1.4.0'
+
     def roomVersion = '2.3.0'
     def coroutineVersion = '1.5.0'
     def preferencesVersion = '1.1.1'
-    def designVersion = '1.4.0'
     def supportVersion = '28.0.0'
     def glideVersion = '4.9.0'
     def swipeRefreshVersion = '1.1.0'
@@ -61,7 +62,7 @@ dependencies {
 
     //Default
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
@@ -72,13 +73,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Firebase
-    implementation platform('com.google.firebase:firebase-bom:28.4.2')
-    //implementation "com.google.firebase:firebase-auth-ktx:21.0.1"
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
     //LifeCycles for Implementing MVVM
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"
@@ -87,6 +89,12 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 
+    //Design
+    implementation "com.google.android.material:material:$designVersion"
+    api 'com.google.android.material:material:1.1.0-alpha06'
+
+
+    //not used yet
     //Room for Local Storage
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
@@ -98,10 +106,6 @@ dependencies {
 
     //Storing data small amounts of data, application wise
     implementation "androidx.preference:preference-ktx:$preferencesVersion"
-
-    //Design
-    implementation "com.google.android.material:material:$designVersion"
-    api 'com.google.android.material:material:1.1.0-alpha06'
 
     //Palette
     implementation "com.android.support:palette-v7:$supportVersion"

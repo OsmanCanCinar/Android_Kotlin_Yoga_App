@@ -97,11 +97,8 @@ class ResetFragment : Fragment() {
 
     private fun resetPassword(view: View) {
         val email = binding.emailTextReset.text.toString()
-        auth.sendPasswordResetEmail(email).addOnSuccessListener {
-            Toast.makeText(context,getString(R.string.reset_text),Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            Toast.makeText(context,it.localizedMessage,Toast.LENGTH_SHORT).show()
-        }
+        viewModel.resetPassword(email, auth)
+
         val actionToSignIn = ResetFragmentDirections.actionResetFragmentToSignInFragment()
         Navigation.findNavController(view).navigate(actionToSignIn)
     }

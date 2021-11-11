@@ -62,7 +62,7 @@
         android:id="@+id/resetFragment"
         android:name="com.osmancancinar.yogaapp.ui.authentication.ResetFragment"
         android:label=""
-        tools:layout="@layout/fragment_reset" >
+        tools:layout="@layout/fragment_reset">
         <action
             android:id="@+id/action_resetFragment_to_signInFragment"
             app:destination="@id/signInFragment"

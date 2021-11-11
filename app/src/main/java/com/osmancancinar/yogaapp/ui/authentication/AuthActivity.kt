@@ -1,12 +1,11 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.ActivityAuthBinding
 import com.osmancancinar.yogaapp.viewModels.auth.AuthVM

@@ -1,21 +1,18 @@
 package com.osmancancinar.yogaapp.ui.home
 
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.ShapeDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.ActivityHomeBinding
 import com.osmancancinar.yogaapp.viewModels.home.HomeActivityVM
@@ -46,9 +43,9 @@ class HomeActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -105,8 +102,8 @@ class HomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener(listener)
     }
 
-     override fun onSupportNavigateUp(): Boolean {
-         val navController = findNavController(R.id.fragmentHome)
-         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragmentHome)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

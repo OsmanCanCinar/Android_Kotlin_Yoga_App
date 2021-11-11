@@ -24,6 +24,4 @@
     <style name="DrawerColor" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/blackish</item>
     </style>
-
-    <style name="MySuperAppTheme"></style>
 </resources>

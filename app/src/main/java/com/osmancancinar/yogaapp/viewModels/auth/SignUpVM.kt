@@ -1,7 +1,10 @@
 package com.osmancancinar.yogaapp.viewModels.auth
 
 import android.app.Application
+import android.content.ContentValues
+import android.util.Log
 import android.util.Patterns
+import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.viewModels.BaseViewModel
 
@@ -38,11 +41,24 @@ class SignUpVM(private val app: Application) : BaseViewModel(app) {
     fun validateName(name: String): String? {
         if (name.length < 3) {
             return app.getString(R.string.error_msg_name_char)
-        }
-        else if (!name.matches("^[a-zA-Z]*$".toRegex())) {
+        } else if (!name.matches("^[a-zA-Z]*$".toRegex())) {
             return app.getString(R.string.error_msg_name)
-        }
-        else return null
+        } else return null
     }
 
+    fun addToDatabase(email: String, username: String, database: FirebaseFirestore) {
+        val user = hashMapOf(
+            "userEmail" to email,
+            "userName" to username
+        )
+
+        database.collection("users")
+            .add(user)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${it.id}")
+            }
+            .addOnFailureListener {
+                Log.w(ContentValues.TAG, "Error adding document", it)
+            }
+    }
 }

@@ -17,8 +17,12 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeVM
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentHomeBinding.inflate(LayoutInflater.from(context),container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentHomeBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
 
@@ -26,9 +30,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(HomeVM::class.java)
-        binding.homeText.setOnClickListener {
+        binding.signOutBtn.setOnClickListener {
             FirebaseAuth.getInstance().signOut();
-            val intent = Intent(context,AuthActivity::class.java)
+            val intent = Intent(context, AuthActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
         }
