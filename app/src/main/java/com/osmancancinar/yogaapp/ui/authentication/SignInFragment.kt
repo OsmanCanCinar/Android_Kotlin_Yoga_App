@@ -8,18 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignInBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.viewModels.auth.SignInVM
 
 class SignInFragment : Fragment() {
 
     private lateinit var binding: FragmentSignInBinding
-    private lateinit var viewModel: SignInVM
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +35,6 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SignInVM::class.java)
 
         binding.goToSignUpText.setOnClickListener {
             navigateToSignUp(view)
@@ -69,7 +65,6 @@ class SignInFragment : Fragment() {
             auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
                 signIn(requireActivity())
             }.addOnFailureListener {
-                //Change this later
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
             }
         }

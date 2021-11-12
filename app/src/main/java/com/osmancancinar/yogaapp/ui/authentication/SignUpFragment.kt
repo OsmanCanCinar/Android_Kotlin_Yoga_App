@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -17,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignUpBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.viewModels.auth.SignUpVM
+import com.osmancancinar.yogaapp.vm.auth.SignUpVM
 
 class SignUpFragment : Fragment() {
 
@@ -63,10 +62,6 @@ class SignUpFragment : Fragment() {
         binding.backToOptionsButton.setOnClickListener {
             goBackToOptions(view)
         }
-
-        binding.termsAndConditionsText.setOnClickListener {
-            showDialog()
-        }
     }
 
     private fun checkAndSignUp() {
@@ -84,12 +79,13 @@ class SignUpFragment : Fragment() {
 
     private fun signUp(activity: Activity) {
         val email = binding.emailText.text.toString()
-        val username = binding.nameText.text.toString()
+        val name = binding.nameText.text.toString()
         val password = binding.passwordText.text.toString()
+        val imgUrl = ""
 
         auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
             Toast.makeText(context, getString(R.string.successful_msg), Toast.LENGTH_LONG).show()
-            viewModel.addToDatabase(email, username, database)
+            viewModel.addToDatabase(email, name, imgUrl, database)
             val intent = Intent(activity, HomeActivity::class.java)
             activity.startActivity(intent)
             activity.finish()
@@ -212,13 +208,5 @@ class SignUpFragment : Fragment() {
     private fun goBackToOptions(view: View) {
         val actionToOptions = SignUpFragmentDirections.actionGlobalGreetFragment()
         Navigation.findNavController(view).navigate(actionToOptions)
-    }
-
-    private fun showDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle(R.string.terms_and_conditions)
-            .setMessage(R.string.terms)
-            .setPositiveButton(R.string.dismiss) { _, _ -> }
-            .show()
     }
 }

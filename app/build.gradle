@@ -51,12 +51,12 @@ dependencies {
     def lifeCycleExtensionVersion = '2.0.0'
     def navVersion = '2.3.5'
     def designVersion = '1.4.0'
+    def glideVersion = '4.9.0'
 
     def roomVersion = '2.3.0'
     def coroutineVersion = '1.5.0'
     def preferencesVersion = '1.1.1'
     def supportVersion = '28.0.0'
-    def glideVersion = '4.9.0'
     def swipeRefreshVersion = '1.1.0'
     //def adVersion = '20.4.0'
 
@@ -93,6 +93,11 @@ dependencies {
     implementation "com.google.android.material:material:$designVersion"
     api 'com.google.android.material:material:1.1.0-alpha06'
 
+    //Circular ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Glide for downloading images
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     //not used yet
     //Room for Local Storage
@@ -110,9 +115,6 @@ dependencies {
     //Palette
     implementation "com.android.support:palette-v7:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
-
-    //Glide for downloading images
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     //Swipe Refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"

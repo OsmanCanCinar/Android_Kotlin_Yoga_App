@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.osmancancinar.yogaapp.databinding.FragmentMeditationBinding
-import com.osmancancinar.yogaapp.viewModels.home.MeditationVM
+import com.osmancancinar.yogaapp.vm.home.MeditationVM
 
 class MeditationFragment : Fragment() {
 
@@ -28,5 +28,4 @@ class MeditationFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(MeditationVM::class.java)
     }
-
 }

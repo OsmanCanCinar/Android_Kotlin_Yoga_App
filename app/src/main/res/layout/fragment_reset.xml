@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.authentication.ResetFragment">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTextInputLayoutReset"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"

@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.viewModels.auth
+package com.osmancancinar.yogaapp.vm.auth
 
 import android.app.Application
 import android.content.ContentValues
@@ -6,7 +6,7 @@ import android.util.Log
 import android.util.Patterns
 import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
-import com.osmancancinar.yogaapp.viewModels.BaseViewModel
+import com.osmancancinar.yogaapp.vm.BaseViewModel
 
 class SignUpVM(private val app: Application) : BaseViewModel(app) {
 
@@ -46,17 +46,20 @@ class SignUpVM(private val app: Application) : BaseViewModel(app) {
         } else return null
     }
 
-    fun addToDatabase(email: String, username: String, database: FirebaseFirestore) {
+    fun addToDatabase(
+        email: String,
+        name: String,
+        imgUrl: String,
+        database: FirebaseFirestore
+    ) {
         val user = hashMapOf(
             "userEmail" to email,
-            "userName" to username
+            "userName" to name,
+            "imgUrl" to imgUrl
         )
 
         database.collection("users")
             .add(user)
-            .addOnSuccessListener {
-                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${it.id}")
-            }
             .addOnFailureListener {
                 Log.w(ContentValues.TAG, "Error adding document", it)
             }

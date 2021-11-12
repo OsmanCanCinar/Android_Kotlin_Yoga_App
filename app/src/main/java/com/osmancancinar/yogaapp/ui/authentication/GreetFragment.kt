@@ -2,12 +2,19 @@ package com.osmancancinar.yogaapp.ui.authentication
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -28,12 +35,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentGreetBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.viewModels.auth.GreetVM
+import com.osmancancinar.yogaapp.vm.auth.GreetVM
 
 class GreetFragment : Fragment() {
 
     companion object {
-        private const val TAG = "FacebookLogin"
+        private const val TAG = "Login"
     }
 
     private lateinit var binding: FragmentGreetBinding
@@ -42,6 +49,9 @@ class GreetFragment : Fragment() {
     private lateinit var database: FirebaseFirestore
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var callbackManager: CallbackManager
+    private var email: String? = null
+    private var name: String? = null
+    private var imgUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,12 +85,13 @@ class GreetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(GreetVM::class.java)
 
+        termsSpan()
+
         binding.buttonEmail.setOnClickListener {
             navigateToEmail(view)
         }
 
         binding.loginButton.setOnClickListener {
-            LoginManager.getInstance().logOut()
             navigateToFacebook()
         }
 
@@ -93,18 +104,60 @@ class GreetFragment : Fragment() {
         }
     }
 
+    private fun termsSpan() {
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.terms_and_conditions)
+                    .setMessage(R.string.terms)
+                    .setPositiveButton(R.string.dismiss) { _, _ -> }
+                    .show()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = Color.BLUE
+                ds.bgColor = Color.WHITE
+            }
+        }
+
+        val clickableSpan2 = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.privacy_policy)
+                    .setMessage(R.string.privacy)
+                    .setPositiveButton(R.string.dismiss) { _, _ -> }
+                    .show()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = Color.BLUE
+                ds.bgColor = Color.WHITE
+            }
+        }
+
+        val spannableString = SpannableString(getString(R.string.terms_text))
+
+        spannableString.setSpan(clickableSpan,28,48,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(clickableSpan2,53,67,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+
+        binding.termsAndConditionsText.text = spannableString
+        binding.termsAndConditionsText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
     private fun navigateToEmail(view: View) {
         val action = GreetFragmentDirections.actionGreetFragmentToSignUpFragment()
         Navigation.findNavController(view).navigate(action)
     }
 
     private fun navigateToFacebook() {
+        LoginManager.getInstance().logOut()
         binding.loginButton.setPermissions("email", "public_profile")
         binding.loginButton.registerCallback(
             callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-                    Log.d(TAG, "facebook:onSuccess:$loginResult")
                     handleFacebookAccessToken(loginResult.accessToken)
                 }
 
@@ -153,11 +206,11 @@ class GreetFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    val email = user?.email
-                    val username = user?.displayName
-                    viewModel.addToDb(email, username, database)
+                    email = user?.email
+                    name = user?.displayName
+                    imgUrl = user?.photoUrl.toString()
+                    viewModel.addToDb(email, name, imgUrl!!, database)
                     signIn()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -171,9 +224,10 @@ class GreetFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val currentUser = auth.currentUser
-                    val email = currentUser?.email
-                    val username = currentUser?.displayName
-                    viewModel.addToDb(email, username, database)
+                    email = currentUser?.email
+                    name = currentUser?.displayName
+                    imgUrl = currentUser?.photoUrl.toString()
+                    viewModel.addToDb(email, name, imgUrl!!, database)
                     signIn()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)

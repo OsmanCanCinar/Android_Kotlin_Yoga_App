@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.viewModels
+package com.osmancancinar.yogaapp.vm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

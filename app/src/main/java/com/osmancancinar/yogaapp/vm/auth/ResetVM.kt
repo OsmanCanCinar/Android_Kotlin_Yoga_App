@@ -1,11 +1,11 @@
-package com.osmancancinar.yogaapp.viewModels.auth
+package com.osmancancinar.yogaapp.vm.auth
 
 import android.app.Application
 import android.util.Patterns
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.R
-import com.osmancancinar.yogaapp.viewModels.BaseViewModel
+import com.osmancancinar.yogaapp.vm.BaseViewModel
 
 class ResetVM(private val app: Application) : BaseViewModel(app) {
 

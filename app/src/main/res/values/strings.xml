@@ -15,8 +15,14 @@
     <string name="continue_with_google">Continue with Google</string>
     <string name="dismiss">Dismiss</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
-    <string name="terms_text">By continuing, you agree to <b>Terms &amp; Conditions</b> and <b>Privacy Policy</b> of the Yoga App</string>
+    <string name="terms_text">By continuing, you agree to Terms and Conditions and Privacy Policy of the Yoga App</string>
     <string name="terms">These Terms and Conditions constitute a legally binding agreement made between you,
+                         whether personally or on behalf of an entity (“you”) and [business entity name] (“we,” “us” or “our”),
+                         concerning your access to and use of the [website name.com] website as well as any other media form,
+                         media channel, mobile website or mobile application related, linked, or otherwise connected thereto
+                         (collectively, the “Site”).</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy">These Privacy Policy constitute a legally binding agreement made between you,
                          whether personally or on behalf of an entity (“you”) and [business entity name] (“we,” “us” or “our”),
                          concerning your access to and use of the [website name.com] website as well as any other media form,
                          media channel, mobile website or mobile application related, linked, or otherwise connected thereto
@@ -32,7 +38,7 @@
 
     <!-- Hints and Helpers -->
     <string name="required">Required*</string>
-    <string name="name">Username</string>
+    <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="reset_password">Reset Password</string>
@@ -51,8 +57,8 @@
     <string name="feature">This feature will be added soon</string>
     <string name="successful_msg">User created successfully</string>
     <string name="reset_text">Reset link is sent to your email</string>
-
     <string name="facebook_app_id">171553195189147</string>
     <string name="fb_login_protocol_scheme">fb171553195189147</string>
+    <string name="sign_out">sign out</string>
 
 </resources>

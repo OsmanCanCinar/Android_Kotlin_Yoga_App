@@ -2,18 +2,15 @@ package com.osmancancinar.yogaapp.ui.authentication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.ActivityAuthBinding
-import com.osmancancinar.yogaapp.viewModels.auth.AuthVM
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
-    private lateinit var viewModel: AuthVM
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +22,6 @@ class AuthActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.myToolBar)
 
-        viewModel = ViewModelProviders.of(this).get(AuthVM::class.java)
         navController = Navigation.findNavController(this, R.id.fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
     }

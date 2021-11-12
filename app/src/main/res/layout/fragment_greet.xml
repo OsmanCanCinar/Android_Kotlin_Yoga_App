@@ -83,4 +83,17 @@
             app:icon="@drawable/ic_baseline_menu_book_24" />
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/termsAndConditionsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/buttonGoogle"
+        app:layout_constraintStart_toStartOf="@id/buttonGoogle"
+        tools:text="@string/terms_text" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

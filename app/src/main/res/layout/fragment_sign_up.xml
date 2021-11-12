@@ -131,18 +131,4 @@
         app:layout_constraintStart_toEndOf="@id/backToOptionsButton"
         app:layout_constraintTop_toBottomOf="@id/goToSignInText" />
 
-    <TextView
-        android:id="@+id/termsAndConditionsText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="@string/terms_text"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayout"
-        app:layout_constraintStart_toStartOf="@id/passwordTextInputLayout" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.viewModels.auth
+package com.osmancancinar.yogaapp.vm.auth
 
 import android.content.ContentValues
 import android.util.Log
@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class GreetVM() : ViewModel() {
 
-    fun addToDb(email: String?, username: String?, database: FirebaseFirestore) {
+    fun addToDb(email: String?, name: String?, imgUrl: String, database: FirebaseFirestore) {
         database.collection("users")
             .whereEqualTo("userEmail", email)
             .addSnapshotListener { value, e ->
@@ -23,20 +23,16 @@ class GreetVM() : ViewModel() {
                     }
                 }
 
-                if (users.contains(email)) {
-                    println("Welcome back!")
-                } else {
+                if (!users.contains(email)) {
                     println("Welcome!")
                     val user = hashMapOf(
-                        "userName" to username,
-                        "userEmail" to email
+                        "userName" to name,
+                        "userEmail" to email,
+                        "imgUrl" to imgUrl
                     )
 
                     database.collection("users")
                         .add(user)
-                        .addOnSuccessListener {
-                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${it.id}")
-                        }
                         .addOnFailureListener {
                             Log.w(ContentValues.TAG, "Error adding document", it)
                         }
