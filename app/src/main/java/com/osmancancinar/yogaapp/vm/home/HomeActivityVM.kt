@@ -5,26 +5,27 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
+import com.osmancancinar.yogaapp.util.Constants
+import com.osmancancinar.yogaapp.util.Constants.CHANNEL_ID
+import com.osmancancinar.yogaapp.util.Constants.CHANNEL_NAME
+import com.osmancancinar.yogaapp.util.Constants.NOTIFICATION_ID
+import com.osmancancinar.yogaapp.util.Constants.messageExtra
+import com.osmancancinar.yogaapp.util.Constants.titleExtra
+import com.osmancancinar.yogaapp.util.NotificationBR
 import com.osmancancinar.yogaapp.vm.BaseViewModel
+import java.util.*
 
-class HomeActivityVM(private val app: Application) : BaseViewModel(app) {
-
-    companion object {
-        const val CHANNEL_ID = "channelID"
-        const val CHANNEL_NAME = "YogaApp"
-        const val NOTIFICATION_ID = 0
-        const val titleExtra = "titleExtra"
-        const val messageExtra = "messageExtra"
-    }
+open class HomeActivityVM(private val app: Application) : BaseViewModel(app) {
 
     fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                Companion.CHANNEL_ID, CHANNEL_NAME,
+                CHANNEL_ID, CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
                 lightColor = Color.GREEN
@@ -42,8 +43,8 @@ class HomeActivityVM(private val app: Application) : BaseViewModel(app) {
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        val notification = NotificationCompat.Builder(app.applicationContext, Companion.CHANNEL_ID)
-            .setContentTitle(titleExtra) //app.getString(R.string.notification_tip)
+        val notification = NotificationCompat.Builder(app.applicationContext, CHANNEL_ID)
+            .setContentTitle(titleExtra)
             .setContentText(messageExtra)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_MAX)

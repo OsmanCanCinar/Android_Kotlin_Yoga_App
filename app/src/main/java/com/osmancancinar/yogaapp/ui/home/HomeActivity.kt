@@ -1,17 +1,10 @@
 package com.osmancancinar.yogaapp.ui.home
 
-import android.app.*
-import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -22,8 +15,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.ActivityHomeBinding
+import com.osmancancinar.yogaapp.util.NotificationUtils
 import com.osmancancinar.yogaapp.vm.home.HomeActivityVM
 import kotlinx.android.synthetic.main.activity_home.*
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -33,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var listener: NavController.OnDestinationChangedListener
     lateinit var toggle: ActionBarDrawerToggle
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
