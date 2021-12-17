@@ -14,18 +14,30 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="150dp"
         android:hint="@string/email"
-        app:helperTextTextColor="@color/black"
+        android:textColorHint="@color/grayish_color"
+        app:boxStrokeColor="@color/light_color"
+        app:boxStrokeErrorColor="@color/reddish_color"
+        app:counterOverflowTextColor="@color/reddish_color"
+        app:counterTextColor="@color/light_color"
+        app:errorIconTint="@color/reddish_color"
+        app:errorTextColor="@color/reddish_color"
+        app:helperTextTextColor="@color/light_color"
+        app:hintTextColor="@color/light_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_baseline_email_24">
+        app:passwordToggleTint="@color/light_color"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:startIconTint="@color/light_color">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailTextReset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lightitalic"
             android:inputType="textEmailAddress"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/light_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -33,8 +45,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/reddish_color"
+        android:fontFamily="@font/regular"
         android:text="@string/reset_password"
+        android:textColor="@color/lightest_color"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@id/emailTextInputLayoutReset"
         app:layout_constraintStart_toStartOf="@id/emailTextInputLayoutReset"

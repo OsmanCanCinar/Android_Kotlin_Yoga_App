@@ -9,36 +9,6 @@ import java.util.*
 
 class NotificationUtils {
 
-    /*
-    fun scheduleNotification(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val alarmPendingIntent by lazy {
-            val intent = Intent(context, NotificationBR::class.java)
-            PendingIntent.getBroadcast(context, 0, intent,PendingIntent.FLAG_CANCEL_CURRENT)
-        }
-
-        val HOUR_TO_SHOW_PUSH = 17
-
-        val calendar = GregorianCalendar.getInstance().apply {
-            if (get(Calendar.HOUR_OF_DAY) >= HOUR_TO_SHOW_PUSH) {
-                add(Calendar.DAY_OF_MONTH, 1)
-            }
-
-            set(Calendar.HOUR_OF_DAY, HOUR_TO_SHOW_PUSH)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }
-
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            alarmPendingIntent
-        )
-    }
-     */
-
     fun setNotification(timeInMilliSeconds: Long, activity: Activity) {
         if (timeInMilliSeconds > 0 ) {
 

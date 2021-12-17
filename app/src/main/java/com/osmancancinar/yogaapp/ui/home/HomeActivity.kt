@@ -64,7 +64,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.meditationFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.green)))
+                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.grayish_color)))
                     }
                 }
                 R.id.yogaFragment -> {

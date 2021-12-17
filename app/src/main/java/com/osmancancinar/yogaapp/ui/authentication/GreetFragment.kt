@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -116,8 +117,8 @@ class GreetFragment : Fragment() {
 
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
-                ds.color = Color.BLUE
-                ds.bgColor = Color.WHITE
+                ds.color = ContextCompat.getColor(requireContext(), R.color.reddish_color)
+                ds.bgColor = ContextCompat.getColor(requireContext(), R.color.lightest_color)
             }
         }
 
@@ -132,15 +133,15 @@ class GreetFragment : Fragment() {
 
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
-                ds.color = Color.BLUE
-                ds.bgColor = Color.WHITE
+                ds.color = ContextCompat.getColor(requireContext(), R.color.reddish_color)
+                ds.bgColor = ContextCompat.getColor(requireContext(), R.color.lightest_color)
             }
         }
 
         val spannableString = SpannableString(getString(R.string.terms_text))
 
-        spannableString.setSpan(clickableSpan,28,48,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(clickableSpan2,53,67,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(clickableSpan,32,52,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(clickableSpan2,57,71,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
 
         binding.termsAndConditionsText.text = spannableString
         binding.termsAndConditionsText.movementMethod = LinkMovementMethod.getInstance()

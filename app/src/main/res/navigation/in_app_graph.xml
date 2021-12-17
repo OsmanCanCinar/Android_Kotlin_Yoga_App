@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/yogaFragment"
-        android:name="com.osmancancinar.yogaapp.ui.home.YogaFragment"
+        android:name="com.osmancancinar.yogaapp.ui.home.yoga.YogaFragment"
         android:label="Yoga"
         tools:layout="@layout/fragment_yoga">
         <action

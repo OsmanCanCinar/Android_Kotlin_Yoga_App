@@ -14,8 +14,7 @@ class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
     private lateinit var navController: NavController
-    private val notificationTime = Calendar.getInstance().timeInMillis + 5000
-    private var notificationFlag = false
+    private val notificationTime : Long = 63000000 //17:30
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +28,8 @@ class AuthActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        if (!notificationFlag) {
-            NotificationUtils().setNotification(notificationTime, this@AuthActivity)
-            //NotificationUtils().scheduleNotification(applicationContext)
+        if (Calendar.getInstance().timeInMillis > notificationTime ) {
+            NotificationUtils().setNotification(1000, this@AuthActivity)
         }
     }
 

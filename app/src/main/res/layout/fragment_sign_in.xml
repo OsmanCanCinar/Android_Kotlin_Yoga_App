@@ -11,11 +11,11 @@
         android:id="@+id/signInText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/semibold"
         android:text="@string/sign_in"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/light_color"
         android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/emailTextInputLayoutSignIn"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,20 +25,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:hint="@string/email"
-        app:helperTextTextColor="@color/black"
+        android:textColorHint="@color/grayish_color"
+        app:boxStrokeColor="@color/light_color"
+        app:boxStrokeErrorColor="@color/reddish_color"
+        app:counterOverflowTextColor="@color/reddish_color"
+        app:counterTextColor="@color/light_color"
+        app:errorIconTint="@color/reddish_color"
+        app:errorTextColor="@color/reddish_color"
+        app:helperTextTextColor="@color/light_color"
+        app:hintTextColor="@color/light_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signInText"
-        app:startIconDrawable="@drawable/ic_baseline_email_24">
+        app:passwordToggleTint="@color/light_color"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:startIconTint="@color/light_color">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailTextSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lightitalic"
             android:inputType="textEmailAddress"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/light_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -47,22 +59,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:hint="@string/password"
-        app:helperTextTextColor="@color/black"
+        android:textColorHint="@color/grayish_color"
+        app:boxStrokeColor="@color/light_color"
+        app:boxStrokeErrorColor="@color/reddish_color"
+        app:counterOverflowTextColor="@color/reddish_color"
+        app:counterTextColor="@color/light_color"
+        app:errorIconTint="@color/reddish_color"
+        app:errorTextColor="@color/reddish_color"
+        app:helperTextTextColor="@color/light_color"
+        app:hintTextColor="@color/light_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailTextInputLayoutSignIn"
         app:passwordToggleEnabled="true"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+        app:passwordToggleTint="@color/light_color"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:startIconTint="@color/light_color">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordTextSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lightitalic"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/light_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -70,10 +94,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/lightitalic"
         android:text="@string/join_here"
-        android:textColor="@color/black"
+        android:textColor="@color/lightest_color"
         android:textSize="14sp"
-        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayoutSignIn"
         app:layout_constraintStart_toStartOf="@id/passwordTextInputLayoutSignIn"
         app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayoutSignIn" />
@@ -83,8 +107,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/lightitalic"
         android:text="@string/forget_password"
-        android:textColor="@color/black"
+        android:textColor="@color/lightest_color"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayoutSignIn"
@@ -96,7 +121,9 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/regular"
         android:text="@string/sign_in_options"
+        android:textColor="@color/reddish_color"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toStartOf="@id/buttonSignIn"
         app:layout_constraintStart_toStartOf="@id/passwordTextInputLayoutSignIn"
@@ -107,8 +134,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/reddish_color"
+        android:fontFamily="@font/regular"
         android:text="@string/register"
+        android:textColor="@color/lightest_color"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayoutSignIn"
         app:layout_constraintStart_toEndOf="@id/backToOptionsButtonSignIn"

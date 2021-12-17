@@ -22,6 +22,6 @@
     </style>
 
     <style name="DrawerColor" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">@color/blackish</item>
+        <item name="color">@color/light_color</item>
     </style>
 </resources>
