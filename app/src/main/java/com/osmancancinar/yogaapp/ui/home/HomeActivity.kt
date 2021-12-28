@@ -1,6 +1,5 @@
 package com.osmancancinar.yogaapp.ui.home
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,10 +14,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.ActivityHomeBinding
-import com.osmancancinar.yogaapp.util.NotificationUtils
-import com.osmancancinar.yogaapp.vm.home.HomeActivityVM
+import com.osmancancinar.yogaapp.viewModels.home.HomeActivityVM
 import kotlinx.android.synthetic.main.activity_home.*
-import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -59,32 +56,32 @@ class HomeActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.homeFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_700)))
+                        //supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_700)))
                     }
                 }
                 R.id.meditationFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.grayish_color)))
+                        //supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.grayish_color)))
                     }
                 }
                 R.id.yogaFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_200)))
+                        //supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_200)))
                     }
                 }
                 R.id.blogFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.splash_img_background)))
+                        //supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.splash_img_background)))
                     }
                 }
                 R.id.profileFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
+                        //supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
                     }
                 }
                 R.id.settingsFragment -> {
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                        supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_500)))
+                        //supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.purple_500)))
                     }
                 }
             }

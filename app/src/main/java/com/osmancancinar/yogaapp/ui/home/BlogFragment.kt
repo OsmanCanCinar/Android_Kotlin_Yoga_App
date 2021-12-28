@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.osmancancinar.yogaapp.databinding.FragmentBlogBinding
-import com.osmancancinar.yogaapp.vm.home.BlogVM
+import com.osmancancinar.yogaapp.viewModels.home.BlogVM
 
 class BlogFragment : Fragment() {
 

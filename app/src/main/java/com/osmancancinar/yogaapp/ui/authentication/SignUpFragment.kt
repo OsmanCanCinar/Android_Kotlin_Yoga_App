@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignUpBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.vm.auth.SignUpVM
+import com.osmancancinar.yogaapp.viewModels.auth.SignUpVM
 
 class SignUpFragment : Fragment() {
 

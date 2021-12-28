@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentResetBinding
-import com.osmancancinar.yogaapp.vm.auth.ResetVM
+import com.osmancancinar.yogaapp.viewModels.auth.ResetVM
 
 class ResetFragment : Fragment() {
 

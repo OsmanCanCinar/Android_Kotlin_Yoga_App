@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.osmancancinar.yogaapp.databinding.FragmentHomeBinding
-import com.osmancancinar.yogaapp.util.NotificationUtils
-import com.osmancancinar.yogaapp.vm.home.HomeVM
-import java.util.*
+import com.osmancancinar.yogaapp.viewModels.home.HomeVM
 
 class HomeFragment : Fragment() {
 

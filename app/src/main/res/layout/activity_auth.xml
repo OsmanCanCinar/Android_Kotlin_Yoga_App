@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_auth"
     tools:context=".ui.authentication.AuthActivity">
 
     <com.google.android.material.appbar.AppBarLayout

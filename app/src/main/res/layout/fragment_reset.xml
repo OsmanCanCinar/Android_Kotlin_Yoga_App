@@ -48,6 +48,7 @@
         android:backgroundTint="@color/reddish_color"
         android:fontFamily="@font/regular"
         android:text="@string/reset_password"
+        android:textAllCaps="false"
         android:textColor="@color/lightest_color"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@id/emailTextInputLayoutReset"

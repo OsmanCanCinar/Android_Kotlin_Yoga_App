@@ -1,24 +1,20 @@
-package com.osmancancinar.yogaapp.vm.home
+package com.osmancancinar.yogaapp.viewModels.home
 
 import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.util.Constants
 import com.osmancancinar.yogaapp.util.Constants.CHANNEL_ID
 import com.osmancancinar.yogaapp.util.Constants.CHANNEL_NAME
 import com.osmancancinar.yogaapp.util.Constants.NOTIFICATION_ID
 import com.osmancancinar.yogaapp.util.Constants.messageExtra
 import com.osmancancinar.yogaapp.util.Constants.titleExtra
-import com.osmancancinar.yogaapp.util.NotificationBR
-import com.osmancancinar.yogaapp.vm.BaseViewModel
-import java.util.*
+import com.osmancancinar.yogaapp.viewModels.BaseViewModel
 
 open class HomeActivityVM(private val app: Application) : BaseViewModel(app) {
 

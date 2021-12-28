@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.vm.auth
+package com.osmancancinar.yogaapp.viewModels.auth
 
 import android.app.Application
 import android.content.ContentValues
@@ -6,7 +6,7 @@ import android.util.Log
 import android.util.Patterns
 import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
-import com.osmancancinar.yogaapp.vm.BaseViewModel
+import com.osmancancinar.yogaapp.viewModels.BaseViewModel
 
 class SignUpVM(private val app: Application) : BaseViewModel(app) {
 

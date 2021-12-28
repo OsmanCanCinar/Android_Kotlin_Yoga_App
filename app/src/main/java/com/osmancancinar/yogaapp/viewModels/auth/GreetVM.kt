@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.vm.auth
+package com.osmancancinar.yogaapp.viewModels.auth
 
 import android.content.ContentValues
 import android.util.Log

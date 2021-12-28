@@ -7,8 +7,8 @@
     tools:context=".ui.home.SettingsFragment">
 
     <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/sign_out_btn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginBottom="20dp"
@@ -16,9 +16,11 @@
         android:paddingEnd="40dp"
         android:text="@string/sign_out"
         android:textAllCaps="false"
+        android:textColor="@color/yoga_tab_color"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/yoga_tab_color" />
 </androidx.constraintlayout.widget.ConstraintLayout>

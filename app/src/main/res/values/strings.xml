@@ -7,7 +7,7 @@
     <string name="already_have_an_account"><u>Already Have an Account?</u></string>
     <string name="join_here"><u>Join Here!</u></string>
     <string name="forget_password"><u>Did you forget your password ?</u></string>
-    <string name="register">Continue</string>
+    <string name="register">CONTINUE</string>
     <string name="sign_in_options">Sign in options</string>
     <string name="sign_up_options">Sign up options</string>
     <string name="continue_with_e_mail">Continue with Email</string>
@@ -60,4 +60,8 @@
     <string name="facebook_app_id">171553195189147</string>
     <string name="fb_login_protocol_scheme">fb171553195189147</string>
     <string name="sign_out">sign out</string>
+    <string name="vinyasa">VINYASA</string>
+    <string name="prenatal">PRENATAL</string>
+    <string name="hatha">HATHA</string>
+    <string name="chair">CHAIR</string>
 </resources>

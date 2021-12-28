@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.databinding.FragmentSettingsBinding
 import com.osmancancinar.yogaapp.ui.authentication.AuthActivity
-import com.osmancancinar.yogaapp.vm.home.SettingsVM
+import com.osmancancinar.yogaapp.viewModels.home.SettingsVM
 
 class SettingsFragment : Fragment() {
 

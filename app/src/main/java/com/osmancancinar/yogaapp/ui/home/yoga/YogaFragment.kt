@@ -11,13 +11,13 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.osmancancinar.yogaapp.adapters.ViewPagerAdapter
 import com.osmancancinar.yogaapp.databinding.FragmentYogaBinding
-import com.osmancancinar.yogaapp.vm.home.YogaVM
+import com.osmancancinar.yogaapp.viewModels.home.YogaVM
 
 class YogaFragment : Fragment() {
 
     private lateinit var binding: FragmentYogaBinding
     private lateinit var viewModel: YogaVM
-    private val tags2 = arrayOf("Chair", "Hatha", "Prenatal", "Vinyasa")
+    private val tags2 = arrayOf("CHAIR", "HATHA", "PRENATAL", "VINYASA")
 
     override fun onCreateView(
         inflater: LayoutInflater,

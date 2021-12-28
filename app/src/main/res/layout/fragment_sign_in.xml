@@ -118,7 +118,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backToOptionsButtonSignIn"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/regular"
@@ -126,21 +126,30 @@
         android:textColor="@color/reddish_color"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toStartOf="@id/buttonSignIn"
-        app:layout_constraintStart_toStartOf="@id/passwordTextInputLayoutSignIn"
-        app:layout_constraintTop_toTopOf="@id/buttonSignIn" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/buttonSignIn"
+        app:strokeColor="@color/reddish_color" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:backgroundTint="@color/reddish_color"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/regular"
         android:text="@string/register"
+        android:textAllCaps="false"
         android:textColor="@color/lightest_color"
         app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayoutSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/backToOptionsButtonSignIn"
-        app:layout_constraintTop_toBottomOf="@id/forgetPasswordText" />
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

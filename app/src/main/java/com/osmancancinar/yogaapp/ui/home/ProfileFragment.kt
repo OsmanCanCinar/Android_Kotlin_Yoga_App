@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentProfileBinding
-import com.osmancancinar.yogaapp.vm.home.ProfileVM
+import com.osmancancinar.yogaapp.viewModels.home.ProfileVM
 
 class ProfileFragment : Fragment() {
 

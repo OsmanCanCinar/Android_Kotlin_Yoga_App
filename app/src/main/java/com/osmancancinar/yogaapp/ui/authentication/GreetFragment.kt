@@ -2,7 +2,6 @@ package com.osmancancinar.yogaapp.ui.authentication
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -36,7 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentGreetBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.vm.auth.GreetVM
+import com.osmancancinar.yogaapp.viewModels.auth.GreetVM
 
 class GreetFragment : Fragment() {
 

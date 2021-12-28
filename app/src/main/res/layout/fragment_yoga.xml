@@ -14,32 +14,33 @@
         app:tabGravity="center"
         android:paddingHorizontal="10dp"
         android:background="@color/white"
+        app:tabTextColor="@color/grayish_color"
         app:tabIndicator="@drawable/yoga_tab_indicator"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabIndicatorColor="@color/yoga_tab_color"
+        app:tabIndicatorColor="@color/light_color"
         app:tabIndicatorGravity="stretch"
         app:tabMode="auto"
-        app:tabSelectedTextColor="@color/white">
+        app:tabSelectedTextColor="@color/lightest_color">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chair" />
+            android:text="@string/chair" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hatha" />
+            android:text="@string/hatha" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prenatal" />
+            android:text="@string/prenatal" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vinyasa" />
+            android:text="@string/vinyasa" />
 
     </com.google.android.material.tabs.TabLayout>
 
