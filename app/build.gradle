@@ -52,6 +52,8 @@ dependencies {
     def navVersion = '2.3.5'
     def designVersion = '1.4.0'
     def glideVersion = '4.9.0'
+    def rxJavaVersion = '2.2.6'
+    def rxAndroidVersion = '2.1.1'
 
     def roomVersion = '2.3.0'
     def coroutineVersion = '1.5.0'
@@ -98,6 +100,10 @@ dependencies {
 
     //Glide for downloading images
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 
     //not used yet
     //Room for Local Storage

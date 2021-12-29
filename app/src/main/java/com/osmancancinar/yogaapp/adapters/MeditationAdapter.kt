@@ -4,11 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.MeditationListRowBinding
 import com.osmancancinar.yogaapp.models.Meditation
 
