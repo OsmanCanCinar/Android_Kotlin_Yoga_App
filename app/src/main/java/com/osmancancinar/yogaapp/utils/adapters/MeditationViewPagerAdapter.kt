@@ -1,10 +1,10 @@
-package com.osmancancinar.yogaapp.adapters
+package com.osmancancinar.yogaapp.utils.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.osmancancinar.yogaapp.ui.home.yoga.*
 
-class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class MeditationViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int {
         return 4

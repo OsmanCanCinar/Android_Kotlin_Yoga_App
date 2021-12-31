@@ -1,6 +1,5 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,21 +8,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentSignUpBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
+import com.osmancancinar.yogaapp.utils.adapters.AuthListener
 import com.osmancancinar.yogaapp.viewModels.auth.SignUpVM
+import dagger.hilt.android.AndroidEntryPoint
 
-class SignUpFragment : Fragment() {
+@AndroidEntryPoint
+class SignUpFragment : Fragment(), AuthListener {
 
     private lateinit var binding: FragmentSignUpBinding
-    private lateinit var viewModel: SignUpVM
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseFirestore
+    private val viewModel: SignUpVM by viewModels()
+
     private var nameFlag: Boolean = false
     private var emailFlag: Boolean = false
     private var passwordFlag: Boolean = false
@@ -31,8 +30,7 @@ class SignUpFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseFirestore.getInstance()
+        viewModel.authListener = this
     }
 
     override fun onCreateView(
@@ -47,12 +45,6 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(SignUpVM::class.java)
-
-        binding.goToSignInText.setOnClickListener {
-            navigateToSignIn(it)
-        }
-
         clickHandler()
 
         binding.buttonSignUp.setOnClickListener {
@@ -61,6 +53,10 @@ class SignUpFragment : Fragment() {
 
         binding.backToOptionsButton.setOnClickListener {
             goBackToOptions(view)
+        }
+
+        binding.goToSignInText.setOnClickListener {
+            navigateToSignIn(it)
         }
     }
 
@@ -73,53 +69,29 @@ class SignUpFragment : Fragment() {
         } else if (nameFlag || emailFlag || passwordFlag) {
             Toast.makeText(context, getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
         } else {
-            signUp(requireActivity())
+            signUp()
         }
     }
 
-    private fun signUp(activity: Activity) {
+    private fun signUp() {
         val email = binding.emailText.text.toString()
-        val name = binding.nameText.text.toString()
+        val username = binding.nameText.text.toString()
         val password = binding.passwordText.text.toString()
-        val imgUrl = ""
 
-        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
-            Toast.makeText(context, getString(R.string.successful_msg), Toast.LENGTH_LONG).show()
-            viewModel.addToDatabase(email, name, imgUrl, database)
-            val intent = Intent(activity, HomeActivity::class.java)
-            activity.startActivity(intent)
-            activity.finish()
-        }.addOnFailureListener {
-            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()
-        }
+        viewModel.signUpWithEmail(email, username, password)
     }
 
-    override fun onResume() {
-        super.onResume()
-        setInitialSetUp()
+    override fun onStarted() {
+        println("Started-SignUp")
     }
 
-    private fun setInitialSetUp() {
-        binding.apply {
+    override fun onSuccess() {
+        signIn()
+        Toast.makeText(context, "Success-Greet", Toast.LENGTH_SHORT).show()
+    }
 
-            nameTextInputLayout.apply {
-                helperText = getString(R.string.required)
-                error = null
-                nameFlag = false
-            }
-
-            emailTextInputLayout.apply {
-                helperText = getString(R.string.required)
-                error = null
-                emailFlag = false
-            }
-
-            passwordTextInputLayout.apply {
-                helperText = getString(R.string.required)
-                error = null
-                passwordFlag = false
-            }
-        }
+    override fun onFailure(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun clickHandler() {
@@ -156,8 +128,8 @@ class SignUpFragment : Fragment() {
         binding.nameText.doOnTextChanged { text, _, _, _ ->
             val txt = text.toString()
             binding.nameTextInputLayout.apply {
-                helperText = viewModel.validateName(txt)
-                error = viewModel.validateName(txt)
+                helperText = viewModel.validateUsername(txt)
+                error = viewModel.validateUsername(txt)
                 nameFlag = false
                 if (!error.isNullOrEmpty()) {
                     nameFlag = true
@@ -200,6 +172,34 @@ class SignUpFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setInitialSetUp()
+    }
+
+    private fun setInitialSetUp() {
+        binding.apply {
+
+            nameTextInputLayout.apply {
+                helperText = getString(R.string.required)
+                error = null
+                nameFlag = false
+            }
+
+            emailTextInputLayout.apply {
+                helperText = getString(R.string.required)
+                error = null
+                emailFlag = false
+            }
+
+            passwordTextInputLayout.apply {
+                helperText = getString(R.string.required)
+                error = null
+                passwordFlag = false
+            }
+        }
+    }
+
     private fun navigateToSignIn(view: View) {
         val actionToSignIn = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment3()
         Navigation.findNavController(view).navigate(actionToSignIn)
@@ -208,5 +208,11 @@ class SignUpFragment : Fragment() {
     private fun goBackToOptions(view: View) {
         val actionToOptions = SignUpFragmentDirections.actionGlobalGreetFragment()
         Navigation.findNavController(view).navigate(actionToOptions)
+    }
+
+    private fun signIn() {
+        val intent = Intent(requireActivity(), HomeActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 }

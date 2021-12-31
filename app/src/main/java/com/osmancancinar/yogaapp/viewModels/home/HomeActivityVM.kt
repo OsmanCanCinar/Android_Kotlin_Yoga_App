@@ -7,16 +7,22 @@ import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.AndroidViewModel
 import com.osmancancinar.yogaapp.R
+import com.osmancancinar.yogaapp.data.repositories.UserRepositories
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
-import com.osmancancinar.yogaapp.util.Constants.CHANNEL_ID
-import com.osmancancinar.yogaapp.util.Constants.CHANNEL_NAME
-import com.osmancancinar.yogaapp.util.Constants.NOTIFICATION_ID
-import com.osmancancinar.yogaapp.util.Constants.messageExtra
-import com.osmancancinar.yogaapp.util.Constants.titleExtra
+import com.osmancancinar.yogaapp.utils.Constants.CHANNEL_ID
+import com.osmancancinar.yogaapp.utils.Constants.CHANNEL_NAME
+import com.osmancancinar.yogaapp.utils.Constants.NOTIFICATION_ID
+import com.osmancancinar.yogaapp.utils.Constants.messageExtra
+import com.osmancancinar.yogaapp.utils.Constants.titleExtra
 import com.osmancancinar.yogaapp.viewModels.BaseViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Named
 
-open class HomeActivityVM(private val app: Application) : BaseViewModel(app) {
+class HomeActivityVM(private val app: Application) : AndroidViewModel(app)  {
+    //@ViewModelInject constructor( @Named("Application") private val app: Application) : AndroidViewModel(app)
 
     fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

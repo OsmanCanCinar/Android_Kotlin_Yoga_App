@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.util
+package com.osmancancinar.yogaapp.utils.notification
 
 import android.app.*
 import android.content.Context
@@ -9,12 +9,12 @@ import android.media.RingtoneManager
 import android.os.Build
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.ui.authentication.AuthActivity
+import com.osmancancinar.yogaapp.utils.Constants
 import java.util.*
 
 class NotificationService : IntentService("NotificationService") {
 
     private lateinit var notification: Notification
-    private val id: Int = 1000
 
     private fun createNotificationChannel() {
 
@@ -24,14 +24,16 @@ class NotificationService : IntentService("NotificationService") {
             val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             val importance = NotificationManager.IMPORTANCE_HIGH
 
-            val notificationChannel = NotificationChannel(Constants.CHANNEL_ID,Constants.CHANNEL_NAME,importance)
+            val notificationChannel = NotificationChannel(
+                Constants.CHANNEL_ID,
+                Constants.CHANNEL_NAME,importance)
 
             notificationChannel.apply {
                 enableLights(true)
                 enableVibration(true)
                 setShowBadge(true)
                 lightColor = Color.parseColor("#e8334a")
-                description = Constants.messageExtra
+                description = Constants.messageExtra2
                 lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             }
 
@@ -56,7 +58,7 @@ class NotificationService : IntentService("NotificationService") {
             val notifyIntent = Intent(this,AuthActivity::class.java)
             notifyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
-            val calendar = Calendar.getInstance()
+            val calendar = GregorianCalendar.getInstance()
             calendar.timeInMillis = timeStamp
 
             val pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -66,16 +68,17 @@ class NotificationService : IntentService("NotificationService") {
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                notification = Notification.Builder(this,Constants.CHANNEL_ID)
+                notification = Notification.Builder(this, Constants.CHANNEL_ID)
                     .setContentIntent(pendingIntent)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setLargeIcon(BitmapFactory.decodeResource(res,R.mipmap.ic_launcher))
                     .setAutoCancel(true)
-                    .setContentTitle(Constants.titleExtra)
-                    .setStyle(Notification.BigTextStyle().bigText(Constants.messageExtra))
-                    .setContentText(Constants.messageExtra)
+                    .setContentTitle(Constants.titleExtra2)
+                    .setStyle(Notification.BigTextStyle().bigText(Constants.messageExtra2))
+                    .setContentText(Constants.messageExtra2)
                     .build()
-            } else {
+            }
+            else {
 
                 notification = Notification.Builder(this)
                     .setContentIntent(pendingIntent)
@@ -83,15 +86,15 @@ class NotificationService : IntentService("NotificationService") {
                     .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))
                     .setAutoCancel(true)
                     .setPriority(Notification.PRIORITY_MAX)
-                    .setContentTitle(Constants.titleExtra)
-                    .setStyle(Notification.BigTextStyle().bigText(Constants.messageExtra))
+                    .setContentTitle(Constants.titleExtra2)
+                    .setStyle(Notification.BigTextStyle().bigText(Constants.messageExtra2))
                     .setSound(uri)
-                    .setContentText(Constants.messageExtra)
+                    .setContentText(Constants.messageExtra2)
                     .build()
             }
 
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.notify(id,notification)
+            notificationManager.notify(Constants.DAILY_NOTIFICATION_ID,notification)
         }
     }
 }

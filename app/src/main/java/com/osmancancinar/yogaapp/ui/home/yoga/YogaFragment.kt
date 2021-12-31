@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.osmancancinar.yogaapp.adapters.ViewPagerAdapter
+import com.osmancancinar.yogaapp.utils.adapters.MeditationViewPagerAdapter
 import com.osmancancinar.yogaapp.databinding.FragmentYogaBinding
 import com.osmancancinar.yogaapp.viewModels.home.YogaVM
 
@@ -32,7 +32,7 @@ class YogaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(YogaVM::class.java)
 
-        binding.viewPager2.adapter = ViewPagerAdapter(this)
+        binding.viewPager2.adapter = MeditationViewPagerAdapter(this)
         TabLayoutMediator(binding.tabLayoutYoga, binding.viewPager2) { tab, position ->
             tab.text = tags2[position]
         }.attach()

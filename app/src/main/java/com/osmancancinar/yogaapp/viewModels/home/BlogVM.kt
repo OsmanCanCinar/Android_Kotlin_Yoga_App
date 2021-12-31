@@ -1,7 +1,6 @@
 package com.osmancancinar.yogaapp.viewModels.home
 
-import android.app.Application
-import com.osmancancinar.yogaapp.viewModels.BaseViewModel
+import androidx.lifecycle.ViewModel
 
-class BlogVM(private val app: Application) : BaseViewModel(app) {
+class BlogVM() : ViewModel() {
 }

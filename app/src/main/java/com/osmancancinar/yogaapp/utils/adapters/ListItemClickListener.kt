@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.adapters
+package com.osmancancinar.yogaapp.utils.adapters
 
 import android.view.View
 

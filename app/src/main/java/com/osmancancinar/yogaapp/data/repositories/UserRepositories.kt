@@ -1,29 +1,43 @@
 package com.osmancancinar.yogaapp.data.repositories
 
+import android.content.Intent
 import com.facebook.AccessToken
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.osmancancinar.yogaapp.data.firebase.FirebaseSource
+import javax.inject.Inject
+import javax.inject.Named
 
-class UserRepositories(private val firebase: FirebaseSource) {
+class UserRepositories @Inject constructor(@Named("Source") private val firebase: FirebaseSource) {
 
-    fun registerUserToDatabase(email: String, username: String) = firebase.registerUserToDatabase(email, username)
+    //Gets firebaseAuth by lazy
+    fun getFirebaseAuthRef(): FirebaseAuth = firebase.firebaseAuth
 
-    fun authWithFacebook(token: AccessToken) = firebase.handleFacebookAccessToken(token)
-
-    fun authWithGoogle(idToken: String) = firebase.authWithGoogle(idToken)
-
-    fun signUpWithEmail(email: String, username: String, password: String) = firebase.signUpWithEmail(email, username, password)
-
+    //Allows user to sign in with the credentials
     fun signInWithEmail(email: String, password: String) = firebase.signInWithEmail(email, password)
 
-    fun getGoogleSignInClient() : GoogleSignInClient = firebase.googleSignInClient
+    //Enrolls user to database email-password
+    fun signUpWithEmail(email: String, username: String, password: String) =
+        firebase.signUpWithEmail(email, username, password)
 
-    fun getFirebaseAuthRef() : FirebaseAuth = firebase.firebaseAuth
-
-    fun getGoogleSignInIntent() = firebase.signInIntent // : Intent
-
+    //Signs Out From firebase
     fun signOutFromFirebase() = firebase.signOutFromFirebase()
 
+    //Sends reset link to given email for password
+    fun resetPasswordWithEmail(email: String) = firebase.resetPasswordWithEmail(email)
+
+    //Gets gsoClients sign in intent by lazy
+    fun getGoogleSignInIntent(): Intent = firebase.signInIntent
+
+    //Authenticates with Google. Both Sign Up and Sign In
+    fun authWithGoogle(idToken: String) = firebase.authWithGoogle(idToken)
+
+    //Signs out with gsoClient
     fun signOutWithGoogle() = firebase.signOutWithGoogle()
+
+    //Registers then user who signed up via username-email-password
+    fun registerUserToDatabase(email: String, username: String) =
+        firebase.registerUserToDatabase(email, username)
+
+    //Authenticates with Facebook. Both Sign Up and Sign In
+    fun authWithFacebook(token: AccessToken) = firebase.handleFacebookAccessToken(token)
 }

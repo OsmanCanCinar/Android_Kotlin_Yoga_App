@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.firestore.*
-import com.osmancancinar.yogaapp.adapters.MeditationAdapter
+import com.osmancancinar.yogaapp.utils.adapters.MeditationAdapter
 import com.osmancancinar.yogaapp.databinding.FragmentMeditationBinding
 import com.osmancancinar.yogaapp.models.Meditation
 import com.osmancancinar.yogaapp.viewModels.home.MeditationVM

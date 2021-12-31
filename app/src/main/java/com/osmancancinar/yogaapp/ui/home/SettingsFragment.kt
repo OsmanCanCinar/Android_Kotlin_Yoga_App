@@ -31,11 +31,15 @@ class SettingsFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(SettingsVM::class.java)
 
         binding.signOutBtn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut();
-            val intent = Intent(context, AuthActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+            FirebaseAuth.getInstance().signOut()
+            goToAuthScreen()
         }
+    }
+
+    private fun goToAuthScreen() {
+        val intent = Intent(context, AuthActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
 }

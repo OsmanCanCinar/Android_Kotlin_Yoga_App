@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.util
+package com.osmancancinar.yogaapp.utils.notification
 
 import android.content.BroadcastReceiver
 import android.content.Context

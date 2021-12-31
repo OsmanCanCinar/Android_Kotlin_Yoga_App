@@ -2,10 +2,7 @@ package com.osmancancinar.yogaapp.viewModels.auth
 
 import android.app.Application
 import android.util.Patterns
-import android.widget.Toast
 import androidx.hilt.lifecycle.ViewModelInject
-import com.google.firebase.auth.FirebaseAuth
-import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.data.repositories.UserRepositories
 import com.osmancancinar.yogaapp.viewModels.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,10 +10,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Named
 
-class ResetVM@ViewModelInject constructor(
+class SignInVM @ViewModelInject constructor(
     @Named("Application") private val app: Application,
     @Named("Repositories") private val repository: UserRepositories
-) : BaseViewModel(app,repository)  {
+) : BaseViewModel(app, repository) {
 
     private val disposables = CompositeDisposable()
 
@@ -28,12 +25,28 @@ class ResetVM@ViewModelInject constructor(
             null
     }
 
-    fun resetPassword(email: String?) {
+    fun validatePassword(password: String?): String? {
+
+        return if (password.isNullOrEmpty()) {
+            "Password cannot be empty"
+        } else
+            null
+    }
+
+    private fun validateSignInInput(email: String?, password: String?) {
 
         validateEmail(email)
+        validatePassword(password)
+
+    }
+
+    fun signInWithEmail(email: String?, password: String?) {
+
+        validateSignInInput(email, password)
+
         authListener?.onStarted()
 
-        val disposable = repository.resetPasswordWithEmail(email!!)
+        val disposable = repository.signInWithEmail(email!!, password!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -41,6 +54,7 @@ class ResetVM@ViewModelInject constructor(
                 { authListener?.onFailure(it.message!!) }
             )
         disposables.add(disposable)
+
     }
 
     override fun onCleared() {

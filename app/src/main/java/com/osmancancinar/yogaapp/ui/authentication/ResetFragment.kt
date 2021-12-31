@@ -1,5 +1,6 @@
 package com.osmancancinar.yogaapp.ui.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,23 +8,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.viewModels
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.databinding.FragmentResetBinding
+import com.osmancancinar.yogaapp.utils.adapters.AuthListener
 import com.osmancancinar.yogaapp.viewModels.auth.ResetVM
+import dagger.hilt.android.AndroidEntryPoint
 
-class ResetFragment : Fragment() {
+@AndroidEntryPoint
+class ResetFragment : Fragment(), AuthListener {
 
     private lateinit var binding: FragmentResetBinding
-    private lateinit var viewModel: ResetVM
-    private lateinit var auth: FirebaseAuth
+    private val viewModel: ResetVM by viewModels()
     private var emailFlag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
+        viewModel.authListener = this
     }
 
     override fun onCreateView(
@@ -36,8 +37,6 @@ class ResetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(ResetVM::class.java)
 
         emailClickHandler()
 
@@ -54,6 +53,22 @@ class ResetFragment : Fragment() {
         } else {
             resetPassword(view)
         }
+    }
+
+    private fun resetPassword(view: View) {
+        val email = binding.emailTextReset.text.toString()
+        viewModel.resetPassword(email)
+    }
+
+    override fun onSuccess() {
+        goBackToGreet()
+        Toast.makeText(context, "Please Check your Email", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goBackToGreet() {
+        val intent = Intent(requireActivity(), AuthActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun emailClickHandler() {
@@ -80,6 +95,14 @@ class ResetFragment : Fragment() {
         }
     }
 
+    override fun onStarted() {
+        println("Started-SignUp")
+    }
+
+    override fun onFailure(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    }
+
     override fun onResume() {
         super.onResume()
         setInitialSetUp()
@@ -95,11 +118,4 @@ class ResetFragment : Fragment() {
         }
     }
 
-    private fun resetPassword(view: View) {
-        val email = binding.emailTextReset.text.toString()
-        viewModel.resetPassword(email, auth)
-
-        val actionToSignIn = ResetFragmentDirections.actionResetFragmentToSignInFragment()
-        Navigation.findNavController(view).navigate(actionToSignIn)
-    }
 }

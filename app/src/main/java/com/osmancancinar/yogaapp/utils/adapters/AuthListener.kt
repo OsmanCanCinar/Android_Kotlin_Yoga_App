@@ -1,4 +1,4 @@
-package com.osmancancinar.yogaapp.ui.authentication
+package com.osmancancinar.yogaapp.utils.adapters
 
 interface AuthListener {
     fun onStarted()

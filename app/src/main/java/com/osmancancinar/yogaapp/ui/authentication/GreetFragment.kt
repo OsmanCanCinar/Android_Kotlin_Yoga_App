@@ -12,11 +12,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -25,34 +26,29 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseUser
 import com.osmancancinar.yogaapp.R
-import com.osmancancinar.yogaapp.data.firebase.FirebaseSource
-import com.osmancancinar.yogaapp.data.repositories.UserRepositories
+import com.osmancancinar.yogaapp.utils.adapters.AuthListener
 import com.osmancancinar.yogaapp.databinding.FragmentGreetBinding
 import com.osmancancinar.yogaapp.ui.home.HomeActivity
 import com.osmancancinar.yogaapp.viewModels.auth.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GreetFragment : Fragment(), AuthListener {
 
     private lateinit var binding: FragmentGreetBinding
-    private lateinit var viewModel: AuthViewModel
-    private lateinit var source: FirebaseSource
-    private lateinit var repository: UserRepositories
-    private lateinit var factory: AuthViewModelFactory
     private var currentUser: FirebaseUser? = null
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        source = FirebaseSource(requireActivity().application)
-        repository = UserRepositories(source)
-        factory = AuthViewModelFactory(requireActivity().application, repository)
-        viewModel = ViewModelProviders.of(requireActivity(), factory).get(AuthViewModel::class.java)
         viewModel.authListener = this
 
         if (viewModel.auth.currentUser != null) {
             currentUser = viewModel.auth.currentUser
             signIn()
         }
+
     }
 
     override fun onCreateView(
@@ -88,47 +84,16 @@ class GreetFragment : Fragment(), AuthListener {
     }
 
     override fun onStarted() {
-
+        println("Started-Greet")
     }
 
     override fun onSuccess() {
-
+        signIn()
+        Toast.makeText(context, "Success-Greet", Toast.LENGTH_SHORT).show()
     }
 
     override fun onFailure(msg: String) {
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        viewModel.callbackManager.onActivityResult(requestCode, resultCode, data)
-
-    }
-
-    fun navigateToFacebook() {
-        viewModel.signOutFromFacebook()
-        binding.loginButton.setPermissions("email", "public_profile")
-        binding.loginButton.registerCallback(
-            viewModel.callbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onSuccess(loginResult: LoginResult) {
-                    viewModel.authWithFacebook(loginResult.accessToken)
-                    viewModel.registerUser(currentUser?.email.toString(), currentUser?.displayName.toString())
-                    signIn()
-                }
-
-                override fun onCancel() {
-                    Log.d(viewModel.TAG, "facebook:onCancel")
-                }
-
-                override fun onError(error: FacebookException) {
-                    Log.d(viewModel.TAG, "facebook:onError", error)
-                }
-            })
-    }
-
-    private fun signInWithFacebook() {
-        navigateToFacebook()
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun signInWithGoogle() {
@@ -144,12 +109,40 @@ class GreetFragment : Fragment(), AuthListener {
                 try {
                     val account = task.getResult(ApiException::class.java)
                     viewModel.authWithGoogle(account.idToken!!)
-                    signIn()
                 } catch (e: ApiException) {
                     Log.w(viewModel.TAG, "Google sign in failed", e)
                 }
             }
         }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        viewModel.callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun navigateToFacebook() {
+        viewModel.signOutFromFacebook()
+        binding.loginButton.setPermissions("email", "public_profile")
+        binding.loginButton.registerCallback(
+            viewModel.callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    viewModel.authWithFacebook(loginResult.accessToken)
+                }
+
+                override fun onCancel() {
+                    Log.d(viewModel.TAG, "facebook:onCancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d(viewModel.TAG, "facebook:onError", error)
+                }
+            })
+    }
+
+    private fun signInWithFacebook() {
+        navigateToFacebook()
+    }
 
     private fun termsSpan() {
         val clickableSpan = object : ClickableSpan() {

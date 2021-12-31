@@ -1,67 +1,121 @@
 package com.osmancancinar.yogaapp.viewModels.auth
 
 import android.app.Application
-import android.content.ContentValues
-import android.util.Log
 import android.util.Patterns
-import com.google.firebase.firestore.FirebaseFirestore
-import com.osmancancinar.yogaapp.R
+import androidx.hilt.lifecycle.ViewModelInject
+import com.osmancancinar.yogaapp.data.repositories.UserRepositories
 import com.osmancancinar.yogaapp.viewModels.BaseViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Named
 
-class SignUpVM(private val app: Application) : BaseViewModel(app) {
+class SignUpVM @ViewModelInject constructor(
+    @Named("Application") private val app: Application,
+    @Named("Repositories") private val repository: UserRepositories
+) : BaseViewModel(app, repository) {
 
-    fun validateEmail(email: String): String? {
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            return app.getString(R.string.error_msg_email)
-        }
-        return null
+    private val disposables = CompositeDisposable()
+
+    var errorMessage: String = ""
+
+    fun registerUser(email: String, username: String) {
+
+        authListener?.onStarted()
+        val disposable = repository.registerUserToDatabase(email, username)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { authListener?.onSuccess() },
+                { authListener?.onFailure(it.message!!) }) //println(it.message!!)
+        disposables.add(disposable)
+
     }
 
-    fun validatePassword(password: String): String? {
+    fun signUpWithEmail(email: String?, username: String?, password: String?) {
+
+        validateSignUpInput(email, username, password)
+
+        authListener?.onStarted()
+
+        val disposable = repository.signUpWithEmail(email!!, username!!, password!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { registerUser(email, username) },
+                { authListener?.onFailure(it.message!!) }
+            )
+        disposables.add(disposable)
+
+    }
+
+    fun validateEmail(email: String?): String? {
+
+        errorMessage = if (email.isNullOrEmpty()) {
+            "Email cannot be empty"
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            "Invalid Email Address"
+        } else
+            return null
+
+        return errorMessage
+    }
+
+    fun validateUsername(username: String?): String? {
+
+        errorMessage =
+            if (username.isNullOrEmpty()) {
+                "Username cannot be empty"
+            } else if (username.length < 3) {
+                "Username must contain at least 3 characters"
+            } else if (!username.matches("^[a-zA-Z]*$".toRegex())) {
+                "Username can only consist of characters"
+            } else {
+                return null
+            }
+
+        return errorMessage
+    }
+
+    fun validatePassword(password: String?): String? {
+
         when {
+            password.isNullOrEmpty() -> {
+                errorMessage = "Password cannot be empty"
+            }
             password.length < 8 -> {
-                return app.getString(R.string.error_msg_password)
+                errorMessage = "Password must include at least 8 characters"
             }
             !password.matches(".*[A-Z].*".toRegex()) -> {
-                return app.getString(R.string.uppercase_error)
+                errorMessage = "Password must contain at least 1 Upper-case character"
             }
             !password.matches(".*[a-z].*".toRegex()) -> {
-                return app.getString(R.string.lowercase_error)
+                errorMessage = "Password must contain at least 1 Lower-case character"
             }
             !password.matches(".*[@#\$%^&+].*".toRegex()) -> {
-                return app.getString(R.string.special_case_error)
+                errorMessage =
+                    "Password must contain at least 1 Special-case character (@#\$%^&amp;+)"
             }
             !password.matches(".*[0-9].*".toRegex()) -> {
-                return app.getString(R.string.number_case_error)
+                errorMessage = "Password must contain at least 1 number (0–9)"
             }
             else -> return null
         }
+
+        return errorMessage
     }
 
-    fun validateName(name: String): String? {
-        if (name.length < 3) {
-            return app.getString(R.string.error_msg_name_char)
-        } else if (!name.matches("^[a-zA-Z]*$".toRegex())) {
-            return app.getString(R.string.error_msg_name)
-        } else return null
+    private fun validateSignUpInput(email: String?, username: String?, password: String?) {
+
+        validateEmail(email)
+        validateUsername(username)
+        validatePassword(password)
+
     }
 
-    fun addToDatabase(
-        email: String,
-        name: String,
-        imgUrl: String,
-        database: FirebaseFirestore
-    ) {
-        val user = hashMapOf(
-            "userEmail" to email,
-            "userName" to name,
-            "imgUrl" to imgUrl
-        )
-
-        database.collection("users")
-            .add(user)
-            .addOnFailureListener {
-                Log.w(ContentValues.TAG, "Error adding document", it)
-            }
+    override fun onCleared() {
+        super.onCleared()
+        disposables.dispose()
     }
+
 }
