@@ -2,10 +2,9 @@ package com.osmancancinar.yogaapp.di
 
 import android.app.Application
 import android.content.Context
-import androidx.navigation.Navigator
 import com.osmancancinar.yogaapp.BaseApplication
 import com.osmancancinar.yogaapp.data.firebase.FirebaseSource
-import com.osmancancinar.yogaapp.data.repositories.UserRepositories
+import com.osmancancinar.yogaapp.data.repository.UserRepositories
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

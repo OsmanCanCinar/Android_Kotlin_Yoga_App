@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:background="@color/lightest_color"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    android:background="@color/lightest_color"
+    tools:context=".view.ui.home.HomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -56,10 +56,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/lightest_color"
-        app:itemTextColor="@color/toolbar_color"
-        app:itemIconTint="@color/light_color"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
+        app:itemIconTint="@color/light_color"
+        app:itemTextColor="@color/toolbar_color"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

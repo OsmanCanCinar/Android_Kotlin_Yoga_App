@@ -4,73 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.authentication.GreetFragment">
+    tools:context=".view.ui.auth.GreetFragment">
 
     <TextView
         android:id="@+id/welcome_text"
+        style="@style/GreetTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/mediumitalic"
-        android:maxLines="1"
-        android:paddingHorizontal="20dp"
-        android:text="Welcome to Yoga App"
-        android:textColor="@color/lightest_color"
-        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@id/guidelineTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginHorizontal="@dimen/margin_horizontal"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/reddish_color"
-        android:fontFamily="@font/regular"
-        android:gravity="center"
-        android:text="@string/continue_with_e_mail"
-        android:textAllCaps="false"
-        android:textColor="@color/lightest_color"
-        android:textSize="16sp"
-        app:cornerRadius="20dp"
+        style="@style/GreetButtonStyle"
         app:icon="@drawable/ic_baseline_email_24"
+        android:text="@string/continue_with_e_mail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop"
+
+        android:layout_marginHorizontal="@dimen/margin_horizontal"
+        android:layout_marginBottom="@dimen/margin_bottom"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/reddish_color"
-        android:fontFamily="@font/regular"
-        android:gravity="center"
-        android:text="@string/continue_with_google"
-        android:textAllCaps="false"
-        android:textColor="@color/lightest_color"
-        android:textSize="16sp"
-        app:cornerRadius="20dp"
+        style="@style/GreetButtonStyle"
         app:icon="@drawable/ic_google"
+        android:text="@string/continue_with_google"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/FrameLayout1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonEmail" />
+        app:layout_constraintTop_toBottomOf="@id/buttonEmail"
+
+        android:layout_marginHorizontal="@dimen/margin_horizontal"
+        android:layout_marginBottom="@dimen/margin_bottom"/>
 
     <FrameLayout
         android:id="@+id/FrameLayout1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonGoogle">
+        app:layout_constraintTop_toBottomOf="@id/buttonGoogle"
+
+        android:layout_marginHorizontal="@dimen/margin_horizontal"
+        android:layout_marginBottom="@dimen/margin_bottom">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
@@ -80,32 +68,24 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/reddish_color"
-            android:fontFamily="@font/regular"
-            android:gravity="center"
+            style="@style/GreetButtonStyle"
+            app:icon="@drawable/ic_baseline_menu_book_24"
             android:text="@string/continue_with_facebook"
-            android:textAllCaps="false"
-            android:textColor="@color/lightest_color"
-            android:textSize="16sp"
-            app:cornerRadius="20dp"
-            app:icon="@drawable/ic_baseline_menu_book_24" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/termsAndConditionsText"
+        style="@style/GreetTermsStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="@string/terms_text"
-        android:textColor="@color/toolbar_color"
-        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/buttonGoogle"
-        app:layout_constraintStart_toStartOf="@id/buttonGoogle" />
+        app:layout_constraintStart_toStartOf="@id/buttonGoogle"
+
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginBottom="10dp"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottom"

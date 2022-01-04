@@ -9,13 +9,55 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.gson.Gson
 import com.osmancancinar.yogaapp.R
+import com.osmancancinar.yogaapp.data.model.MeditationCategory
+import com.osmancancinar.yogaapp.utils.CustomSharedPreferences
 import io.reactivex.Completable
 import javax.inject.Inject
 import javax.inject.Named
 
 class FirebaseSource @Inject constructor(@Named("Application") val app: Application) {
+
+    /*
+    private val meditationCategoryList: ArrayList<MeditationCategory> by lazy {
+        arrayListOf()
+    }
+     */
+
+    private val customPreferences: CustomSharedPreferences by lazy {
+        CustomSharedPreferences(app)
+    }
+
+    fun saveToPreferences(meditationCategoryList: ArrayList<MeditationCategory>) {
+        val gson = Gson()
+        val list_name: String = gson.toJson(meditationCategoryList)
+        println(list_name)
+        customPreferences.clearList()
+        customPreferences.saveList(list_name)
+    }
+
+    fun displayMeditationCategories() = Completable.create { emitter ->
+        var  meditationCategoryList: ArrayList<MeditationCategory> = arrayListOf()
+        firebaseFireStore.collection("meditation").orderBy("id", Query.Direction.ASCENDING).get()
+            .addOnCompleteListener {
+                if (!emitter.isDisposed) {
+                    if (it.isSuccessful) {
+                        for (dc: DocumentChange in it.result?.documentChanges!!) {
+                            if (dc.type == DocumentChange.Type.ADDED) {
+                                meditationCategoryList.add(dc.document.toObject(MeditationCategory::class.java))
+                            }
+                        }
+                        saveToPreferences(meditationCategoryList)
+                        emitter.onComplete()
+                    } else
+                        emitter.onError(it.exception!!)
+                }
+            }
+    }
 
     //By lazy, we don't initialize firebaseAuth till we use it.
     val firebaseAuth: FirebaseAuth by lazy {
@@ -67,14 +109,11 @@ class FirebaseSource @Inject constructor(@Named("Application") val app: Applicat
     fun signOutFromFirebase() = firebaseAuth.signOut()
 
     // We initialize google sign in options object to be displayed.
-    private val gso: GoogleSignInOptions =
-        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(app.getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+    private val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(app.getString(R.string.default_web_client_id)).requestEmail().build()
 
     //By lazy, we prevent unnecessary object initializations and it is thread safe.
-    val googleSignInClient: GoogleSignInClient by lazy {
+    private val googleSignInClient: GoogleSignInClient by lazy {
         GoogleSignIn.getClient(app, gso)
     }
 
@@ -137,4 +176,5 @@ class FirebaseSource @Inject constructor(@Named("Application") val app: Applicat
                 }
             }
         }
+
 }

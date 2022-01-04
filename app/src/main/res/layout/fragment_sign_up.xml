@@ -5,178 +5,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.authentication.SignUpFragment">
+    tools:context=".view.ui.auth.SignUpFragment">
 
     <TextView
         android:id="@+id/signUpText"
+        android:text="@string/sign_up"
+        style="@style/SigningTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/semibold"
-        android:text="@string/sign_up"
-        android:textColor="@color/light_color"
-        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/nameTextInputLayout"
         app:layout_constraintStart_toStartOf="@id/nameTextInputLayout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+
+        android:layout_marginTop="5dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/SigningTextInputLayoutStyle"
+        android:hint="@string/name"
+        app:helperText="@string/required"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:counterEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="45dp"
-        android:hint="@string/name"
-        android:textColorHint="@color/grayish_color"
-        app:boxStrokeColor="@color/light_color"
-        app:boxStrokeErrorColor="@color/reddish_color"
-        app:counterEnabled="true"
-        app:counterMaxLength="16"
-        app:counterOverflowTextColor="@color/reddish_color"
-        app:counterTextColor="@color/light_color"
-        app:errorIconTint="@color/reddish_color"
-        app:errorTextColor="@color/reddish_color"
-        app:helperText="@string/required"
-        app:helperTextTextColor="@color/light_color"
-        app:hintTextColor="@color/light_color"
         app:layout_constraintBottom_toTopOf="@id/emailTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signUpText"
-        app:passwordToggleTint="@color/light_color"
-        app:startIconDrawable="@drawable/ic_baseline_person_24"
-        app:startIconTint="@color/light_color">
+
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="45dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameText"
+            style="@style/SigningTextInputEditTextStyle"
+            android:inputType="textPersonName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lightitalic"
-            android:inputType="text"
-            android:maxLength="16"
-            android:maxLines="1"
-            android:textColor="@color/light_color" />
+            android:layout_height="wrap_content" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/SigningTextInputLayoutStyle"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:helperText="@string/required"
+        android:hint="@string/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/email"
-        android:textColorHint="@color/grayish_color"
-        app:boxStrokeColor="@color/light_color"
-        app:boxStrokeErrorColor="@color/reddish_color"
-        app:counterOverflowTextColor="@color/reddish_color"
-        app:counterTextColor="@color/light_color"
-        app:errorIconTint="@color/reddish_color"
-        app:errorTextColor="@color/reddish_color"
-        app:helperText="@string/required"
-        app:helperTextTextColor="@color/light_color"
-        app:hintTextColor="@color/light_color"
         app:layout_constraintBottom_toTopOf="@id/passwordTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
-        app:startIconTint="@color/light_color">
+
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lightitalic"
+            style="@style/SigningTextInputEditTextStyle"
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:textColor="@color/light_color" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/SigningTextInputLayoutStyle"
+        app:helperText="@string/required"
+        android:hint="@string/password"
+        app:counterEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:passwordToggleEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/password"
-        android:textColorHint="@color/grayish_color"
-        app:boxStrokeColor="@color/light_color"
-        app:boxStrokeErrorColor="@color/reddish_color"
-        app:counterEnabled="true"
-        app:counterMaxLength="16"
-        app:counterOverflowTextColor="@color/reddish_color"
-        app:counterTextColor="@color/light_color"
-        app:endIconTint="@color/light_color"
-        app:errorIconTint="@color/reddish_color"
-        app:errorTextColor="@color/reddish_color"
-        app:helperText="@string/required"
-        app:helperTextTextColor="@color/light_color"
-        app:hintTextColor="@color/light_color"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailTextInputLayout"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/light_color"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24"
-        app:startIconTint="@color/light_color">
+
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lightitalic"
+            style="@style/SigningTextInputEditTextStyle"
             android:inputType="textPassword"
-            android:maxLength="16"
-            android:maxLines="1"
-            android:textColor="@color/light_color" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/goToSignInText"
+        style="@style/SigningDirectToText"
+        android:text="@string/already_have_an_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/lightitalic"
-        android:text="@string/already_have_an_account"
-        android:textColor="@color/lightest_color"
-        android:textSize="14sp"
-        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@id/passwordTextInputLayout"
         app:layout_constraintStart_toStartOf="@id/passwordTextInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout" />
+        app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout"
+
+        android:layout_marginTop="20dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backToOptionsButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/OutlinedButton"
+        android:text="@string/sign_up_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/regular"
-        android:text="@string/sign_up_options"
-        android:textColor="@color/toolbar_color"
-        app:cornerRadius="20dp"
         app:layout_constraintEnd_toStartOf="@id/buttonSignUp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/buttonSignUp"
-        app:strokeColor="@color/toolbar_color" />
+        app:layout_constraintTop_toTopOf="@id/buttonSignUp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSignUp"
+        style="@style/DenseButton"
+        android:text="@string/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/toolbar_color"
-        android:fontFamily="@font/regular"
-        android:text="@string/register"
-        android:textColor="@color/lightest_color"
-        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/backToOptionsButton"
-        app:layout_constraintTop_toBottomOf="@id/goToSignInText" />
+        app:layout_constraintTop_toBottomOf="@id/goToSignInText"
+
+        android:layout_marginTop="50dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

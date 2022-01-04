@@ -4,28 +4,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="meditation"
-            type="com.osmancancinar.yogaapp.models.Meditation" />
-    </data>
+        <data>
+            <variable
+                name="meditationCategory"
+                type="com.osmancancinar.yogaapp.data.model.MeditationCategory" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            <variable
+                name="listener"
+                type="com.osmancancinar.yogaapp.adapter.MeditationCategoryListener" />
+        </data>
 
-        <!-- app:cardBackgroundColor="@{Integer.valueOf(meditation.colorCode)}" -->
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/linearMeditation"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:elevation="7dp"
-            android:focusable="true"
-            app:cardCornerRadius="15dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/linearMeditation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:elevation="7dp"
+                android:focusable="true"
+                app:cardCornerRadius="15dp"
+                app:categoryColor="@{meditationCategory}"
+                android:onClick="@{() -> listener.onClick(meditationCategory)}">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,17 +37,18 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:padding="5dp"
                     android:id="@+id/meditation_row_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/light_italic"
                     android:gravity="center"
                     android:lines="2"
+                    android:padding="5dp"
                     android:textColor="@color/lightest_color"
-                    android:fontFamily="@font/lightitalic"
                     android:textSize="25sp"
-                    tools:text="yoga" />
+                    tools:text="yoga"
+                    app:categoryName="@{meditationCategory}"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

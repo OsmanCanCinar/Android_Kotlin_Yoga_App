@@ -12,7 +12,7 @@
         android:text="This is the Yoga App"
         android:textColor="@color/toolbar_color"
         android:textSize="20sp"
-        android:fontFamily="@font/mediumitalic"
+        android:fontFamily="@font/medium_italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
