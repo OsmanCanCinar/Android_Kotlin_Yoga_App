@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/greetFragment"
-        android:name="com.osmancancinar.yogaapp.view.ui.auth.GreetFragment"
+        android:name="com.osmancancinar.yogaapp.ui.view.auth.GreetFragment"
         android:label=""
         tools:layout="@layout/fragment_greet">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.osmancancinar.yogaapp.view.ui.auth.SignInFragment"
+        android:name="com.osmancancinar.yogaapp.ui.view.auth.SignInFragment"
         android:label=""
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.osmancancinar.yogaapp.view.ui.auth.SignUpFragment"
+        android:name="com.osmancancinar.yogaapp.ui.view.auth.SignUpFragment"
         android:label=""
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -65,7 +65,7 @@
         app:popExitAnim="@anim/slide_out_to_right" />
     <fragment
         android:id="@+id/resetFragment"
-        android:name="com.osmancancinar.yogaapp.view.ui.auth.ResetFragment"
+        android:name="com.osmancancinar.yogaapp.ui.view.auth.ResetFragment"
         android:label=""
         tools:layout="@layout/fragment_reset">
         <action

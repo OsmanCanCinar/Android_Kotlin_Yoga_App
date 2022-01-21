@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.auth.SignInFragment">
+    tools:context=".ui.view.auth.SignInFragment">
 
     <TextView
         android:id="@+id/signInText"
@@ -36,6 +36,7 @@
             android:id="@+id/emailTextSignIn"
             style="@style/SigningTextInputEditTextStyle"
             android:inputType="textEmailAddress"
+            android:maxLength="30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -47,6 +48,7 @@
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
         android:hint="@string/password"
         app:passwordToggleEnabled="true"
+        app:counterMaxLength="16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,7 +9,7 @@ class CustomSharedPreferences {
 
     companion object {
 
-        private const val PREFERENCES_LIST = "preferences_list"
+        private val PREFERENCES_TIME = "preferences_time"
         private var sharedPreferences: SharedPreferences? = null
         private lateinit var editor: SharedPreferences.Editor
         private var lock = Any()
@@ -30,17 +30,17 @@ class CustomSharedPreferences {
         }
     }
 
-    fun saveList(list: String) {
+    fun saveTime(time: Long) {
         sharedPreferences?.edit(commit = true) {
-            putString(PREFERENCES_LIST, list)
+            putLong(PREFERENCES_TIME, time)
         }
     }
 
-    fun clearList() {
+    fun clearTime() {
         sharedPreferences?.edit(commit = true) {
             this.clear()
         }
     }
 
-    fun getList() = sharedPreferences?.getString(PREFERENCES_LIST, "")
+    fun getTime() = sharedPreferences?.getLong(PREFERENCES_TIME, 0)
 }

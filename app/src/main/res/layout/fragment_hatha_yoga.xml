@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grayish_color"
-    tools:context=".view.ui.home.yoga.HathaYogaFragment">
+    tools:context=".ui.view.home.yoga.HathaYogaFragment">
 
     <TextView
         android:layout_width="match_parent"

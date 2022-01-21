@@ -15,11 +15,11 @@
         android:theme="@style/SplashScreenTheme" >
 
         <activity
-            android:name="com.osmancancinar.yogaapp.view.ui.home.HomeActivity"
+            android:name="com.osmancancinar.yogaapp.ui.view.home.HomeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.osmancancinar.yogaapp.view.ui.auth.AuthActivity"
+            android:name="com.osmancancinar.yogaapp.ui.view.auth.AuthActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 

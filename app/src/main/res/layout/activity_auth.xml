@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_auth"
-    tools:context=".view.ui.auth.AuthActivity">
+    tools:context=".ui.view.auth.AuthActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"

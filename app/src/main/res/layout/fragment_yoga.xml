@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.ui.home.yoga.YogaFragment">
+    tools:context=".ui.view.home.yoga.YogaFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutYoga"

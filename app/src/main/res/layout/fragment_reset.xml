@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.auth.ResetFragment">
+    tools:context=".ui.view.auth.ResetFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTextInputLayoutReset"
@@ -23,6 +23,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailTextReset"
             style="@style/SigningTextInputEditTextStyle"
+            android:maxLength="30"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

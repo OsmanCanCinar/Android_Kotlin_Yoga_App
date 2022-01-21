@@ -2,9 +2,13 @@ package com.osmancancinar.yogaapp.di
 
 import android.app.Application
 import android.content.Context
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.osmancancinar.yogaapp.BaseApplication
+import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.data.firebase.FirebaseSource
-import com.osmancancinar.yogaapp.data.repository.UserRepositories
+import com.osmancancinar.yogaapp.data.repository.FirebaseRepositories
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +37,7 @@ object AppModule {
     @Singleton
     @Provides
     @Named("Repositories")
-    fun provideRepository(repository: UserRepositories): UserRepositories {
+    fun provideRepository(repository: FirebaseRepositories): FirebaseRepositories {
         return repository
     }
 
@@ -44,4 +48,15 @@ object AppModule {
         return source
     }
 
+
+    //?
+    @Singleton
+    @Provides
+    fun provideGlideInstance(@ApplicationContext context: Context) =
+        Glide.with(context).setDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.ic_image)
+                .error(R.drawable.ic_image)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+        )
 }
