@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.osmancancinar.yogaapp.data.model.Blog
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.Yoga
@@ -61,4 +62,20 @@ interface AppDao {
 
     @Query("SELECT * FROM yoga_table WHERE yogaId = :yogaId")
     suspend fun getSelectedYoga(yogaId: Int): Yoga
+
+    //Blog Related
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertBlogList(list: List<Blog>)
+
+
+    @Query("DELETE FROM blog_table")
+    suspend fun deleteBlogList()
+
+
+    @Query("SELECT* FROM blog_table")
+    fun getBlogList(): LiveData<List<Blog>>
+
+
+    @Query("SELECT * FROM blog_table WHERE postId = :blogId")
+    suspend fun getSelectedBlog(blogId: Int): Blog
 }

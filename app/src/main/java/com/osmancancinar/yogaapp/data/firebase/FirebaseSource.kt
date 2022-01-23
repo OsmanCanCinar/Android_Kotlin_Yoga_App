@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.data.database.AppDatabase
+import com.osmancancinar.yogaapp.data.model.Blog
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
 import com.osmancancinar.yogaapp.data.model.Yoga
@@ -232,7 +233,6 @@ class FirebaseSource @Inject constructor(
     }
 
 
-    // .orderBy("yogaId", Query.Direction.ASCENDING)
     fun getYogaFB(category: String) = Completable.create { emitter ->
         val yogaList: ArrayList<Yoga> = arrayListOf()
         firebaseFireStore.collection("yoga")
@@ -249,6 +249,31 @@ class FirebaseSource @Inject constructor(
                         GlobalScope.launch(Dispatchers.IO) {
                             roomRepositories.deleteYogaList()
                             roomRepositories.insertYogaList(yogaList)
+                        }
+                        emitter.onComplete()
+                    } else
+                        emitter.onError(it.exception!!)
+                }
+            }
+    }
+
+
+    fun getBlogListFB() = Completable.create { emitter ->
+        val blogList: ArrayList<Blog> = arrayListOf()
+        firebaseFireStore.collection("blog")
+            .orderBy("postId", Query.Direction.ASCENDING)
+            .get()
+            .addOnCompleteListener {
+                if (!emitter.isDisposed) {
+                    if (it.isSuccessful) {
+                        for (dc: DocumentChange in it.result?.documentChanges!!) {
+                            if (dc.type == DocumentChange.Type.ADDED) {
+                                blogList.add(dc.document.toObject(Blog::class.java))
+                            }
+                        }
+                        GlobalScope.launch(Dispatchers.IO) {
+                            roomRepositories.deleteBlogList()
+                            roomRepositories.insertBlogList(blogList)
                         }
                         emitter.onComplete()
                     } else

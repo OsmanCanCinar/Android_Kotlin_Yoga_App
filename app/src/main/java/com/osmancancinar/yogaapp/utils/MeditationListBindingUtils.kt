@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.osmancancinar.yogaapp.R
+import com.osmancancinar.yogaapp.data.model.Blog
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
 import com.osmancancinar.yogaapp.data.model.Yoga
@@ -121,5 +122,26 @@ fun TextView.setYogaLength(item: Yoga?) {
 fun downloadYogaCover(image: ImageView, item: Yoga?) {
     item?.let {
         image.downloadCover(item.imageURL, placeHolderProgressBar(image.context))
+    }
+}
+
+@BindingAdapter("postName")
+fun TextView.setPostName(item: Blog?) {
+    item?.let {
+        text = it.postTitle
+    }
+}
+
+@BindingAdapter("postTitle")
+fun TextView.setPostTitle(item: Blog?) {
+    item?.let {
+        text = it.postTitle
+    }
+}
+
+@BindingAdapter("downloadPostImage")
+fun downloadYogaCover(image: ImageView, item: Blog?) {
+    item?.let {
+        image.downloadCover(item.firstImageURL, placeHolderProgressBar(image.context))
     }
 }

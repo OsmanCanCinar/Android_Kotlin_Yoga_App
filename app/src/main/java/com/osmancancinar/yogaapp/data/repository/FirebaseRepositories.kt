@@ -21,6 +21,9 @@ class FirebaseRepositories @Inject constructor(@Named("Source") private val fire
     fun getYogaFB(category: String) = firebase.getYogaFB(category)
 
 
+    fun getBlogListFB() = firebase.getBlogListFB()
+
+
     //Registers then user who signed up via username-email-password
     fun registerUserToDatabase(email: String, username: String) =
         firebase.registerUserToFirebase(email, username)

@@ -2,6 +2,7 @@ package com.osmancancinar.yogaapp.data.repository
 
 import androidx.lifecycle.LiveData
 import com.osmancancinar.yogaapp.data.database.AppDao
+import com.osmancancinar.yogaapp.data.model.Blog
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
 import com.osmancancinar.yogaapp.data.model.Yoga
@@ -59,6 +60,7 @@ class RoomRepositories(private val dao: AppDao) {
         dao.insertYogaList(list)
     }
 
+
     fun getYogaList(): LiveData<List<Yoga>> {
         return dao.getYogaList()
     }
@@ -66,5 +68,26 @@ class RoomRepositories(private val dao: AppDao) {
 
     suspend fun getSelectedYoga(id: Int): Yoga {
         return dao.getSelectedYoga(id)
+    }
+
+
+    //Blog Related
+    suspend fun deleteBlogList() {
+        dao.deleteBlogList()
+    }
+
+
+    suspend fun insertBlogList(list: List<Blog>) {
+        dao.insertBlogList(list)
+    }
+
+
+    fun getBlogList(): LiveData<List<Blog>> {
+        return dao.getBlogList()
+    }
+
+
+    suspend fun getSelectedBlog(id: Int): Blog {
+        return dao.getSelectedBlog(id)
     }
 }

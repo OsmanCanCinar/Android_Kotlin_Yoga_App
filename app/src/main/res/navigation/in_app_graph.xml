@@ -28,9 +28,14 @@
     </fragment>
     <fragment
         android:id="@+id/blogFragment"
-        android:name="com.osmancancinar.yogaapp.ui.view.home.BlogFragment"
+        android:name="com.osmancancinar.yogaapp.ui.view.home.blog.BlogFragment"
         android:label="Blog"
-        tools:layout="@layout/fragment_blog"/>
+        tools:layout="@layout/fragment_blog">
+        <action
+            android:id="@+id/action_blogFragment_to_blogDetailFragment"
+            app:destination="@id/blogDetailFragment"
+            app:popUpTo="@id/blogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/meditationFragment"
         android:name="com.osmancancinar.yogaapp.ui.view.home.meditation.MeditationsListFragment"
@@ -80,4 +85,13 @@
             app:argType="integer" />
     </fragment>
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment" />
+    <fragment
+        android:id="@+id/blogDetailFragment"
+        android:name="com.osmancancinar.yogaapp.ui.view.home.blog.BlogDetailFragment"
+        android:label="post"
+        tools:layout="@layout/fragment_blog_detail" >
+        <argument
+            android:name="blogId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

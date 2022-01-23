@@ -4,14 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.osmancancinar.yogaapp.data.model.Blog
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.Yoga
 
 //For now, Database only consists of Meditation Category object, and as we update it, we will increase the version number by 1.
 @Database(
-    entities = [MeditationCategoriesList::class, MeditationCategory::class, Yoga::class],
-    version = 4,
+    entities = [MeditationCategoriesList::class, MeditationCategory::class, Yoga::class, Blog::class],
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
