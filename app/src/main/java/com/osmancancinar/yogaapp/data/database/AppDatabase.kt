@@ -6,9 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
+import com.osmancancinar.yogaapp.data.model.Yoga
 
 //For now, Database only consists of Meditation Category object, and as we update it, we will increase the version number by 1.
-@Database(entities = [MeditationCategoriesList::class, MeditationCategory::class], version = 2, exportSchema = false)
+@Database(
+    entities = [MeditationCategoriesList::class, MeditationCategory::class, Yoga::class],
+    version = 4,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     //in order to cal our queries we reference an abstract Database Access Object.
@@ -32,44 +37,3 @@ abstract class AppDatabase : RoomDatabase() {
         ).fallbackToDestructiveMigration().build()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-       fun getInstance(context: Context): AppDatabase { synchronized(this) {
-               var instance = INSTANCE
-
-               if (instance == null) {
-                   instance = Room.databaseBuilder(
-                       context.applicationContext, AppDatabase::class.java, "app_database"
-                   ).fallbackToDestructiveMigration().build()
-                   INSTANCE = instance
-               }
-               return instance
-           }
-       }
-*/

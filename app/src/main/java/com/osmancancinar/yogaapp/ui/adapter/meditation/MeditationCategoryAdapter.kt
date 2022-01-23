@@ -13,7 +13,10 @@ class MeditationCategoryAdapter(private val clickListener: MeditationCategoryLis
         MeditationCategoryDiffCallBack()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeditationCategoryViewHolder =
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MeditationCategoryViewHolder =
         MeditationCategoryViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: MeditationCategoryViewHolder, position: Int) {
@@ -30,7 +33,7 @@ class MeditationCategoryAdapter(private val clickListener: MeditationCategoryLis
         }
 
         companion object {
-            fun from(parent: ViewGroup):MeditationCategoryViewHolder {
+            fun from(parent: ViewGroup): MeditationCategoryViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = MeditationCatagoryRowBinding.inflate(layoutInflater, parent, false)
                 return MeditationCategoryViewHolder(binding)
@@ -56,6 +59,7 @@ class MeditationCategoryAdapter(private val clickListener: MeditationCategoryLis
     }
 }
 
-class MeditationCategoryListener(val listener : (meditationId : Int) -> Unit) {
-    fun onClick(meditationCategory: MeditationCategory) = listener(meditationCategory.meditationId!!)
+class MeditationCategoryListener(val listener: (meditationId: Int) -> Unit) {
+    fun onClick(meditationCategory: MeditationCategory) =
+        listener(meditationCategory.meditationId!!)
 }

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "meditation_category_table")
-class MeditationCategory (
+data class MeditationCategory(
 
     @ColumnInfo(name = "colorCode")
     var colorCode: String? = null,

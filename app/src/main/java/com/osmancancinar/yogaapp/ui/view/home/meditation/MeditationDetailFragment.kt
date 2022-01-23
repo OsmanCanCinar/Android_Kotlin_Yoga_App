@@ -28,7 +28,7 @@ class MeditationDetailFragment : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
-    //  glide.load(song.imageUrl).into(ivSongImage)
+    //glide.load(song.imageUrl).into(ivSongImage)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

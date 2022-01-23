@@ -55,6 +55,7 @@ class MeditationsListAdapter(private val clickListener: MeditationCategoriesList
     }
 }
 
-class MeditationCategoriesListListener(val listener : (categoryId : Int) -> Unit) {
-    fun onClick(meditationCategoriesList: MeditationCategoriesList) = listener(meditationCategoriesList.categoryId!!)
+class MeditationCategoriesListListener(val listener: (categoryId: Int) -> Unit) {
+    fun onClick(meditationCategoriesList: MeditationCategoriesList) =
+        listener(meditationCategoriesList.categoryId!!)
 }

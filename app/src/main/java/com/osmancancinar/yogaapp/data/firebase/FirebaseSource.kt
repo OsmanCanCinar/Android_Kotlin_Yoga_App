@@ -16,6 +16,7 @@ import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.data.database.AppDatabase
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
+import com.osmancancinar.yogaapp.data.model.Yoga
 import com.osmancancinar.yogaapp.data.repository.RoomRepositories
 import io.reactivex.Completable
 import kotlinx.coroutines.Dispatchers
@@ -222,6 +223,32 @@ class FirebaseSource @Inject constructor(
                         GlobalScope.launch(Dispatchers.IO) {
                             roomRepositories.deleteMeditationCategory()
                             roomRepositories.insertMeditationCategory(meditationCategoryList)
+                        }
+                        emitter.onComplete()
+                    } else
+                        emitter.onError(it.exception!!)
+                }
+            }
+    }
+
+
+    // .orderBy("yogaId", Query.Direction.ASCENDING)
+    fun getYogaFB(category: String) = Completable.create { emitter ->
+        val yogaList: ArrayList<Yoga> = arrayListOf()
+        firebaseFireStore.collection("yoga")
+            .whereEqualTo("category", category)
+            .get()
+            .addOnCompleteListener {
+                if (!emitter.isDisposed) {
+                    if (it.isSuccessful) {
+                        for (dc: DocumentChange in it.result?.documentChanges!!) {
+                            if (dc.type == DocumentChange.Type.ADDED) {
+                                yogaList.add(dc.document.toObject(Yoga::class.java))
+                            }
+                        }
+                        GlobalScope.launch(Dispatchers.IO) {
+                            roomRepositories.deleteYogaList()
+                            roomRepositories.insertYogaList(yogaList)
                         }
                         emitter.onComplete()
                     } else

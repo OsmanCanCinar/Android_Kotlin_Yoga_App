@@ -115,7 +115,7 @@ class MeditationDetailVM @ViewModelInject constructor(
         return createTimeLabel(totalTime)
     }
 
-   fun setTimeLabels(currentPosition: Int): ArrayList<String> {
+    fun setTimeLabels(currentPosition: Int): ArrayList<String> {
         val list: ArrayList<String> = arrayListOf()
 
         val elapsedTime = createTimeLabel(currentPosition)

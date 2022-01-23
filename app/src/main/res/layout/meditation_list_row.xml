@@ -4,32 +4,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-        <data>
-            <variable
-                name="meditationCategoriesList"
-                type="com.osmancancinar.yogaapp.data.model.MeditationCategoriesList" />
+    <data>
 
-            <variable
-                name="listener"
-                type="com.osmancancinar.yogaapp.ui.adapter.meditation.MeditationCategoriesListListener" />
-        </data>
+        <variable
+            name="meditationCategoriesList"
+            type="com.osmancancinar.yogaapp.data.model.MeditationCategoriesList" />
 
-        <LinearLayout
+        <variable
+            name="listener"
+            type="com.osmancancinar.yogaapp.ui.adapter.meditation.MeditationCategoriesListListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/linearMeditationCategoriesList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/linearMeditationCategoriesList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:clickable="true"
-                android:elevation="7dp"
-                android:focusable="true"
-                app:cardCornerRadius="15dp"
-                app:categoryColor="@{meditationCategoriesList}"
-                android:onClick="@{() -> listener.onClick(meditationCategoriesList)}">
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:elevation="7dp"
+            android:focusable="true"
+            android:onClick="@{() -> listener.onClick(meditationCategoriesList)}"
+            app:cardCornerRadius="15dp"
+            app:categoryColor="@{meditationCategoriesList}">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,8 +48,8 @@
                     android:padding="5dp"
                     android:textColor="@color/lightest_color"
                     android:textSize="25sp"
-                    tools:text="yoga"
-                    app:categoryName="@{meditationCategoriesList}"/>
+                    app:categoryName="@{meditationCategoriesList}"
+                    tools:text="meditation" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

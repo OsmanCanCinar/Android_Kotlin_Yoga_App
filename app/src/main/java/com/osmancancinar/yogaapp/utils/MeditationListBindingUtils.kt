@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.VideoView
 import androidx.cardview.widget.CardView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -12,9 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.osmancancinar.yogaapp.R
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
-import kotlinx.android.synthetic.main.fragment_meditation_detail.view.*
-import java.math.BigDecimal
-import java.math.RoundingMode
+import com.osmancancinar.yogaapp.data.model.Yoga
 
 @BindingAdapter("categoryName")
 fun TextView.setMeditationCategoryName(item: MeditationCategoriesList?) {
@@ -70,18 +70,18 @@ fun CardView.setMeditationCategoryBackGroundColor(item: MeditationCategory?) {
     }
 }
 
-fun ImageView.setMeditationCover(url : String?, progressDrawable : CircularProgressDrawable) {
+fun ImageView.downloadCover(url: String?, progressDrawable: CircularProgressDrawable) {
     val options = RequestOptions()
         .placeholder(progressDrawable)
         .error(R.mipmap.ic_launcher_round)
 
-       Glide.with(context)
-           .setDefaultRequestOptions(options)
-           .load(url)
-           .into(this)
+    Glide.with(context)
+        .setDefaultRequestOptions(options)
+        .load(url)
+        .into(this)
 }
 
-fun placeHolderProgressBar(context : Context) : CircularProgressDrawable {
+fun placeHolderProgressBar(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {
         strokeWidth = 8f
         centerRadius = 40f
@@ -92,7 +92,34 @@ fun placeHolderProgressBar(context : Context) : CircularProgressDrawable {
 @BindingAdapter("downloadMeditationCover")
 fun downloadMeditationCover(image: ImageView, item: MeditationCategory?) {
     item?.let {
-        image.setMeditationCover(item.imageURL, placeHolderProgressBar(image.context))
+        image.downloadCover(item.imageURL, placeHolderProgressBar(image.context))
     }
+}
 
+@BindingAdapter("yogaName")
+fun TextView.setYogaName(item: Yoga?) {
+    item?.let {
+        text = it.yogaTitle
+    }
+}
+
+@BindingAdapter("yogaDesc")
+fun TextView.setYogaDesc(item: Yoga?) {
+    item?.let {
+        text = it.yogaDescription
+    }
+}
+
+@BindingAdapter("yogaLength")
+fun TextView.setYogaLength(item: Yoga?) {
+    item?.let {
+        text = it.length.toString()
+    }
+}
+
+@BindingAdapter("downloadYogaCover")
+fun downloadYogaCover(image: ImageView, item: Yoga?) {
+    item?.let {
+        image.downloadCover(item.imageURL, placeHolderProgressBar(image.context))
+    }
 }

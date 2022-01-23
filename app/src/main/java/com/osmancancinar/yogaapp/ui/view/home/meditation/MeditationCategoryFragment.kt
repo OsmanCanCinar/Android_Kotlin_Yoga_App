@@ -25,8 +25,8 @@ class MeditationCategoryFragment : Fragment(), FirebaseListener {
     private lateinit var binding: FragmentMeditationCategoryBinding
     private val viewModel: MeditationCategoryVM by viewModels()
     private lateinit var mAdapter: MeditationCategoryAdapter
-    private val args : MeditationCategoryFragmentArgs by navArgs()
-    private var id: Int ?= null
+    private val args: MeditationCategoryFragmentArgs by navArgs()
+    private var id: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,11 @@ class MeditationCategoryFragment : Fragment(), FirebaseListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMeditationCategoryBinding.inflate(LayoutInflater.from(context), container, false)
+        binding = FragmentMeditationCategoryBinding.inflate(
+            LayoutInflater.from(context),
+            container,
+            false
+        )
         return binding.root
     }
 
@@ -47,16 +51,19 @@ class MeditationCategoryFragment : Fragment(), FirebaseListener {
 
         navigateToMeditation(view)
 
-       binding.meditationCategory.apply {
-           layoutManager = LinearLayoutManager(context)
-           adapter = mAdapter
-       }
+        binding.meditationCategory.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdapter
+        }
         viewModel.displayMeditationCategory(id!!)
     }
 
     private fun navigateToMeditation(view: View) {
         mAdapter = MeditationCategoryAdapter(MeditationCategoryListener {
-            val action = MeditationCategoryFragmentDirections.actionMeditationCategoryFragmentToMeditationDetailFragment(it)
+            val action =
+                MeditationCategoryFragmentDirections.actionMeditationCategoryFragmentToMeditationDetailFragment(
+                    it
+                )
             Navigation.findNavController(view).navigate(action)
         })
     }

@@ -18,7 +18,7 @@ data class MeditationCategoriesList(
     var meditationCategoryTitle: String? = null,
 
     @ColumnInfo(name = "categoryId")
-    var categoryId: Int ?= null
+    var categoryId: Int? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     var index: Int = 0

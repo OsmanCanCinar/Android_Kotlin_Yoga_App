@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.osmancancinar.yogaapp" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.osmancancinar.yogaapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,14 +11,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/SplashScreenTheme" >
+        android:theme="@style/SplashScreenTheme">
 
         <activity
-            android:name="com.osmancancinar.yogaapp.ui.view.home.HomeActivity"
+            android:name=".ui.view.home.yoga.TemplateActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+
+        <activity
+            android:name=".ui.view.home.HomeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.osmancancinar.yogaapp.ui.view.auth.AuthActivity"
+            android:name=".ui.view.auth.AuthActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
@@ -33,7 +37,6 @@
         <meta-data
             android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
             android:value="false" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -42,11 +45,9 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -64,6 +65,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
+
 </manifest>

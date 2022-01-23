@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import com.osmancancinar.yogaapp.data.database.AppDao
 import com.osmancancinar.yogaapp.data.model.MeditationCategoriesList
 import com.osmancancinar.yogaapp.data.model.MeditationCategory
+import com.osmancancinar.yogaapp.data.model.Yoga
 
-class RoomRepositories (private val dao: AppDao) {
+class RoomRepositories(private val dao: AppDao) {
 
     //Meditation Categories List Related
     //Deletes all of categories from the database with the use of Coroutines.
@@ -45,5 +46,25 @@ class RoomRepositories (private val dao: AppDao) {
     //Meditation Detail Related
     suspend fun getSelectedMeditation(id: Int): MeditationCategory {
         return dao.getSelectedMeditation(id)
+    }
+
+
+    //Yoga Related
+    suspend fun deleteYogaList() {
+        dao.deleteYogaList()
+    }
+
+
+    suspend fun insertYogaList(list: List<Yoga>) {
+        dao.insertYogaList(list)
+    }
+
+    fun getYogaList(): LiveData<List<Yoga>> {
+        return dao.getYogaList()
+    }
+
+
+    suspend fun getSelectedYoga(id: Int): Yoga {
+        return dao.getSelectedYoga(id)
     }
 }

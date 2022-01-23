@@ -48,8 +48,6 @@ object AppModule {
         return source
     }
 
-
-    //?
     @Singleton
     @Provides
     fun provideGlideInstance(@ApplicationContext context: Context) =

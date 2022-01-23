@@ -14,8 +14,9 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Named
 
 class MeditationCategoriesListVM @ViewModelInject constructor(
-    @Named("Application")private val app: Application,
-    @Named("Repositories") private val firebaseRepositories: FirebaseRepositories) : BaseViewModel(app, firebaseRepositories) {
+    @Named("Application") private val app: Application,
+    @Named("Repositories") private val firebaseRepositories: FirebaseRepositories
+) : BaseViewModel(app, firebaseRepositories) {
 
     private val disposables = CompositeDisposable()
     private val dao = AppDatabase.invoke(app.applicationContext).appDao()
@@ -25,7 +26,7 @@ class MeditationCategoriesListVM @ViewModelInject constructor(
         displayMeditationCategoriesList()
     }
 
-    private fun displayMeditationCategoriesList(){
+    private fun displayMeditationCategoriesList() {
         firebaseListener?.onStarted()
 
         val disposable = firebaseRepositories.getMeditationCategoriesListFB()

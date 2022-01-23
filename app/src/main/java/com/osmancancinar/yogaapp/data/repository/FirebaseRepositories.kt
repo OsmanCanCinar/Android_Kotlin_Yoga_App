@@ -18,8 +18,12 @@ class FirebaseRepositories @Inject constructor(@Named("Source") private val fire
     fun getMeditationCategoryFB(id: Int) = firebase.getMeditationCategoryFB(id)
 
 
+    fun getYogaFB(category: String) = firebase.getYogaFB(category)
+
+
     //Registers then user who signed up via username-email-password
-    fun registerUserToDatabase(email: String, username: String) = firebase.registerUserToFirebase(email, username)
+    fun registerUserToDatabase(email: String, username: String) =
+        firebase.registerUserToFirebase(email, username)
 
 
     //FIREBASE-AUTH RELATED
@@ -36,7 +40,8 @@ class FirebaseRepositories @Inject constructor(@Named("Source") private val fire
 
 
     //Enrolls user to database email-password
-    fun signUpWithEmail(email: String, username: String, password: String) = firebase.signUpWithEmail(email, username, password)
+    fun signUpWithEmail(email: String, username: String, password: String) =
+        firebase.signUpWithEmail(email, username, password)
 
 
     //Sends reset link to given email for password

@@ -146,6 +146,10 @@ dependencies {
     def circularImgVersion = "3.1.0"
     implementation "de.hdodenhof:circleimageview:$circularImgVersion"
 
+    // ExoPlayer for Video Playing
+    implementation 'com.google.android.exoplayer:exoplayer:2.15.0'
+
+
     /*
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -157,7 +161,6 @@ dependencies {
     def supportVersion = '28.0.0'
     implementation "com.android.support:palette-v7:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
-
 
     //Google Ads
     //def adVersion = '20.4.0'

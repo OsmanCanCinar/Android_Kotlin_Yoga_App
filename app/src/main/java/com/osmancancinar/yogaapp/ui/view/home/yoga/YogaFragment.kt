@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.osmancancinar.yogaapp.ui.adapter.YogaViewPagerAdapter
 import com.osmancancinar.yogaapp.databinding.FragmentYogaBinding
-import com.osmancancinar.yogaapp.ui.viewModel.home.yoga.YogaVM
+import com.osmancancinar.yogaapp.ui.adapter.yoga.YogaViewPagerAdapter
 
 class YogaFragment : Fragment() {
 
     private lateinit var binding: FragmentYogaBinding
-    private lateinit var viewModel: YogaVM
-    private val tags2 = arrayOf("CHAIR", "HATHA", "PRENATAL", "VINYASA")
+    private val tags2 = arrayOf("CHAIR", "HATHA")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +27,6 @@ class YogaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(YogaVM::class.java)
 
         binding.viewPager2.adapter = YogaViewPagerAdapter(this)
         TabLayoutMediator(binding.tabLayoutYoga, binding.viewPager2) { tab, position ->
