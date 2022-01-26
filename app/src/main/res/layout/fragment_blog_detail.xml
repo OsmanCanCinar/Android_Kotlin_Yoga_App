@@ -26,6 +26,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/blog_detail_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:visibility="invisible"
+                    app:indicatorColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/blog_cardView_image"
                     android:layout_width="0dp"

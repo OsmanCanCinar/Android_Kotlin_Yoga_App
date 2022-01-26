@@ -25,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import android.os.Looper
 
-
 @AndroidEntryPoint
 class MeditationDetailFragment : Fragment() {
 
@@ -34,7 +33,6 @@ class MeditationDetailFragment : Fragment() {
     private val viewModel: MeditationDetailVM by viewModels()
     private var id: Int? = null
     private var isPlaying: Boolean = false
-    private lateinit var handler: Handler
 
     @Inject
     lateinit var glide: RequestManager
@@ -58,16 +56,45 @@ class MeditationDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideSystemBars()
         observeLiveData()
         setPositionBar()
         controlSound()
+    }
+
+    private fun controlSound() {
+        binding.playBtn.setOnClickListener {
+            if (!isPlaying) {
+                val totalTime = viewModel.playButton()
+                binding.positionBar.max = totalTime
+                binding.positionBar.visibility = View.VISIBLE
+                initializePositionBar(viewModel.mp)
+                binding.playBtn.background =
+                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_pause)
+                binding.meditationDetailProgress.visibility = View.INVISIBLE
+            } else {
+                binding.playBtn.background =
+                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_play)
+                viewModel.pauseButton()
+            }
+            isPlaying = !isPlaying
+        }
     }
 
     private fun observeLiveData() {
         viewModel.selectedMeditation.observe(viewLifecycleOwner, Observer { meditation ->
             meditation?.let {
                 binding.selectedMeditation = it
+            }
+        })
+
+        viewModel.meditationLoading.observe(viewLifecycleOwner, Observer { readiness ->
+            readiness?.let {
+                if (it) {
+                    binding.meditationDetailProgress.visibility = View.VISIBLE
+
+                } else {
+                    binding.meditationDetailProgress.visibility = View.INVISIBLE
+                }
             }
         })
     }
@@ -90,35 +117,6 @@ class MeditationDetailFragment : Fragment() {
         )
     }
 
-    private fun controlSound() {
-        binding.playBtn.setOnClickListener {
-            if (!isPlaying) {
-                val totalTime = viewModel.playButton()
-                binding.positionBar.max = totalTime
-                binding.positionBar.visibility = View.VISIBLE
-                initializePositionBar(viewModel.mp)
-                binding.playBtn.background =
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_pause)
-                isPlaying = true
-            } else {
-                binding.playBtn.background =
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_play)
-                viewModel.pauseButton()
-                isPlaying = false
-            }
-
-        }
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-        binding.playBtn.background =
-            AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_play)
-        viewModel.pauseButton()
-        isPlaying = false
-    }
-
     private fun initializePositionBar(mp: MediaPlayer?) {
         var list: ArrayList<String>
         val handler = Handler()
@@ -139,60 +137,17 @@ class MeditationDetailFragment : Fragment() {
         }, 0)
     }
 
-    private fun hideSystemBars() {
-       hideIt()
-
-        requireActivity().window.decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-            // Note that system bars will only be "visible" if none of the
-            // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
-            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                handler.postDelayed({
-                    hideIt()
-                },2000)
-                // adjustments to your UI, such as showing the action bar or
-                // other navigational controls.
-            } else {
-
-                // adjustments to your UI, such as hiding the action bar or
-                // other navigational controls.
-            }
-        }
-
-
-        val windowInsetsController =
-            ViewCompat.getWindowInsetsController(requireActivity().window.decorView) ?: return
-        // Configure the behavior of the hidden system bars
-        windowInsetsController.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        // Hide both the status bar and the navigation bar
-        windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
-        windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
-    }
-
-    private fun hideIt() {
-        handler = Handler(Looper.getMainLooper())
-        activity?.window!!.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LOW_PROFILE
-        }
-    }
-
-    private fun unHideSystemBars() {
-        val windowInsetsController =
-            ViewCompat.getWindowInsetsController(requireActivity().window.decorView) ?: return
-        windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
-
-        activity?.window?.decorView?.apply {
-            // Calling setSystemUiVisibility() with a value of 0 clears
-            // all flags.
-            systemUiVisibility = 0
-        }
+    override fun onPause() {
+        super.onPause()
+        binding.playBtn.background =
+            AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_play)
+        viewModel.pauseButton()
+        isPlaying = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         viewModel.callOnDestroy()
-        unHideSystemBars()
-        handler.removeCallbacksAndMessages(null);
     }
 
 }

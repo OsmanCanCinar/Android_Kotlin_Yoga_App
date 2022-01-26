@@ -28,14 +28,17 @@ class MeditationDetailVM @ViewModelInject constructor(
     private lateinit var theMeditation: MeditationCategory
     var mp: MediaPlayer? = null
 
+    val meditationLoading = MutableLiveData<Boolean>()
+
     fun getSelectedMeditation(id: Int) {
+        meditationLoading.value = true
         launch {
             val meditation = roomRepositories.getSelectedMeditation(id)
             selectedMeditation.value = meditation
         }
     }
 
-    private fun prepareMP() {
+    private fun prepareMP(){
         theMeditation = selectedMeditation.value!!
         audioURL = theMeditation.audioURL
 
@@ -54,10 +57,26 @@ class MeditationDetailVM @ViewModelInject constructor(
             try {
                 prepare()
                 totalTime = duration
+                setOnPreparedListener {
+                    meditationLoading.value = false
+                }
             } catch (e: IOException) {
                 e.printStackTrace()
+                meditationLoading.value = true
             }
         }
+    }
+
+    fun playButton(): Int {
+        if (mp == null) {
+            prepareMP()
+        }
+        mp?.start()
+        return totalTime
+    }
+
+    fun seekToPositionBar(progress: Int) {
+        mp!!.seekTo(progress)
     }
 
     private fun createTimeLabel(time: Int): String {
@@ -72,32 +91,6 @@ class MeditationDetailVM @ViewModelInject constructor(
         return timeLabel
     }
 
-    fun callOnDestroy() {
-        if (mp != null) {
-            mp?.stop()
-            mp?.reset()
-            mp?.release()
-            mp = null
-        }
-    }
-
-    fun seekToPositionBar(progress: Int) {
-        mp!!.seekTo(progress)
-    }
-
-    fun playButton(): Int {
-        if (mp == null) {
-            prepareMP()
-        }
-        mp?.start()
-        return totalTime
-    }
-
-    fun pauseButton() {
-        if (mp != null)
-            mp?.pause()
-    }
-
     fun setTimeLabels(currentPosition: Int): ArrayList<String> {
         val list: ArrayList<String> = arrayListOf()
 
@@ -108,5 +101,19 @@ class MeditationDetailVM @ViewModelInject constructor(
         list.add("-$remainingTime")
 
         return list
+    }
+
+    fun pauseButton() {
+        if (mp != null)
+            mp?.pause()
+    }
+
+    fun callOnDestroy() {
+        if (mp != null) {
+            mp?.stop()
+            mp?.reset()
+            mp?.release()
+            mp = null
+        }
     }
 }
