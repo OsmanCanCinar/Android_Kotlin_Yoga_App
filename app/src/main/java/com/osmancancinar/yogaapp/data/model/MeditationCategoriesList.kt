@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//This is the same meditation data model for firebase and room database.
 @Entity(tableName = "meditation_categories_list_table")
 data class MeditationCategoriesList(
 

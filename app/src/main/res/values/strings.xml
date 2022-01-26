@@ -76,5 +76,7 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="how_do_you_feel">how do you feel today ?</string>
+    <string name="continue_reading"><u>Continue Reading</u></string>
 
 </resources>

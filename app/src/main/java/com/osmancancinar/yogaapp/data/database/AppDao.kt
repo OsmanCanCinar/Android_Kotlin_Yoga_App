@@ -13,8 +13,11 @@ import com.osmancancinar.yogaapp.data.model.Yoga
 @Dao
 interface AppDao {
 
-    //Meditation Categories List Related
-    //I am inserting the list that holds the meditation categories which I retrieved from the Firebase-Firestore with Coroutines.
+
+    /**
+     *Meditation Categories List Related
+     */
+    // I am inserting the list that holds the meditation categories which I retrieved from the Firebase-Firestore with Coroutines.
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMeditationCategoriesList(list: List<MeditationCategoriesList>)
 
@@ -29,7 +32,9 @@ interface AppDao {
     fun getMeditationCategoriesList(): LiveData<List<MeditationCategoriesList>>
 
 
-    //Meditation Category Related
+    /**
+     *Meditation Category Related
+     */
     @Query("DELETE FROM meditation_category_table")
     suspend fun deleteMeditationCategory()
 
@@ -42,12 +47,16 @@ interface AppDao {
     fun getMeditationCategory(): LiveData<List<MeditationCategory>>
 
 
-    //Meditation Detail Related
+    /**
+     *Meditation Detail Related
+     */
     @Query("SELECT * FROM meditation_category_table WHERE meditationId = :meditationId")
     suspend fun getSelectedMeditation(meditationId: Int): MeditationCategory
 
 
-    //Yoga Related
+    /**
+     *Yoga Related
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertYogaList(list: List<Yoga>)
 
@@ -63,7 +72,10 @@ interface AppDao {
     @Query("SELECT * FROM yoga_table WHERE yogaId = :yogaId")
     suspend fun getSelectedYoga(yogaId: Int): Yoga
 
-    //Blog Related
+
+    /**
+     *Blog Related
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertBlogList(list: List<Blog>)
 
@@ -78,4 +90,5 @@ interface AppDao {
 
     @Query("SELECT * FROM blog_table WHERE postId = :blogId")
     suspend fun getSelectedBlog(blogId: Int): Blog
+
 }

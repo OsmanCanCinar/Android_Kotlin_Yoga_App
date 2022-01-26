@@ -9,8 +9,9 @@ import javax.inject.Named
 
 class FirebaseRepositories @Inject constructor(@Named("Source") private val firebase: FirebaseSource) {
 
-
-    //FIREBASE-FIRESTORE RELATED
+    /**
+     *FIREBASE-FIRESTORE RELATED
+     */
     //retrieves data from firebase and saves it to the room to be displayed.
     fun getMeditationCategoriesListFB() = firebase.getMeditationCategoriesListFB()
 
@@ -29,7 +30,9 @@ class FirebaseRepositories @Inject constructor(@Named("Source") private val fire
         firebase.registerUserToFirebase(email, username)
 
 
-    //FIREBASE-AUTH RELATED
+    /**
+     *FIREBASE-AUTH RELATED
+     */
     //Signs Out From firebase
     fun signOutFromFirebase() = firebase.signOutFromFirebase()
 
@@ -65,4 +68,5 @@ class FirebaseRepositories @Inject constructor(@Named("Source") private val fire
 
     //Authenticates with Facebook. Both Sign Up and Sign In
     fun authWithFacebook(token: AccessToken) = firebase.handleFacebookAccessToken(token)
+
 }

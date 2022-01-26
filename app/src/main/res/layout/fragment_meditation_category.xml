@@ -6,17 +6,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.view.home.meditation.MeditationCategoryFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/meditation_category_guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/meditation_category_guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/meditation_category_guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/meditation_category_guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/meditationCategory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/meditation_category_guideline_bottom"
+        app:layout_constraintEnd_toEndOf="@id/meditation_category_guideline_end"
+        app:layout_constraintStart_toStartOf="@id/meditation_category_guideline_start"
+        app:layout_constraintTop_toTopOf="@id/meditation_category_guideline_top" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

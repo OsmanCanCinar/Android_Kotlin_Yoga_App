@@ -28,7 +28,6 @@ class MeditationDetailVM @ViewModelInject constructor(
     private lateinit var theMeditation: MeditationCategory
     var mp: MediaPlayer? = null
 
-
     fun getSelectedMeditation(id: Int) {
         launch {
             val meditation = roomRepositories.getSelectedMeditation(id)
@@ -49,7 +48,7 @@ class MeditationDetailVM @ViewModelInject constructor(
             )
 
             isLooping = false
-            setVolume(0.5f, 0.5f)
+            setVolume(0.7f, 0.7f)
             setDataSource(audioURL)
 
             try {
@@ -86,11 +85,6 @@ class MeditationDetailVM @ViewModelInject constructor(
         mp!!.seekTo(progress)
     }
 
-    fun seekToVolumeBar(progress: Int) {
-        val volumeNum = progress / 100.0f
-        mp!!.setVolume(volumeNum, volumeNum)
-    }
-
     fun playButton(): Int {
         if (mp == null) {
             prepareMP()
@@ -102,17 +96,6 @@ class MeditationDetailVM @ViewModelInject constructor(
     fun pauseButton() {
         if (mp != null)
             mp?.pause()
-    }
-
-    fun stopButton(): String {
-        if (mp != null) {
-            mp?.stop()
-            mp?.reset()
-            mp?.release()
-            mp = null
-        }
-
-        return createTimeLabel(totalTime)
     }
 
     fun setTimeLabels(currentPosition: Int): ArrayList<String> {

@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/meditationFragment"
         android:name="com.osmancancinar.yogaapp.ui.view.home.meditation.MeditationsListFragment"
-        android:label="Meditation Categories"
+        android:label="Meditation"
         tools:layout="@layout/fragment_meditation">
         <action
             android:id="@+id/action_meditationFragment_to_meditationCategoryFragment"
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/meditationCategoryFragment"
         android:name="com.osmancancinar.yogaapp.ui.view.home.meditation.MeditationCategoryFragment"
-        android:label="Meditations"
+        android:label=""
         tools:layout="@layout/fragment_meditation_category" >
         <action
             android:id="@+id/action_meditationCategoryFragment_to_meditationDetailFragment"
@@ -88,7 +88,7 @@
     <fragment
         android:id="@+id/blogDetailFragment"
         android:name="com.osmancancinar.yogaapp.ui.view.home.blog.BlogDetailFragment"
-        android:label="post"
+        android:label=""
         tools:layout="@layout/fragment_blog_detail" >
         <argument
             android:name="blogId"

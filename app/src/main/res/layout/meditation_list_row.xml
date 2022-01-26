@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="meditationCategoriesList"
             type="com.osmancancinar.yogaapp.data.model.MeditationCategoriesList" />
@@ -24,7 +23,8 @@
             android:id="@+id/linearMeditationCategoriesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="15dp"
             android:clickable="true"
             android:elevation="7dp"
             android:focusable="true"

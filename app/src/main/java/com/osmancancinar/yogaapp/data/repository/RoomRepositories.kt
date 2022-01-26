@@ -9,7 +9,10 @@ import com.osmancancinar.yogaapp.data.model.Yoga
 
 class RoomRepositories(private val dao: AppDao) {
 
-    //Meditation Categories List Related
+
+    /**
+     *Meditation Categories List Related
+     */
     //Deletes all of categories from the database with the use of Coroutines.
     suspend fun deleteMeditationCategoriesList() {
         dao.deleteMeditationCategoriesList()
@@ -28,7 +31,9 @@ class RoomRepositories(private val dao: AppDao) {
     }
 
 
-    //Meditation Category Related
+    /**
+     *Meditation Category Related
+     */
     suspend fun deleteMeditationCategory() {
         dao.deleteMeditationCategory()
     }
@@ -44,13 +49,17 @@ class RoomRepositories(private val dao: AppDao) {
     }
 
 
-    //Meditation Detail Related
+    /**
+     *Meditation Detail Related
+     */
     suspend fun getSelectedMeditation(id: Int): MeditationCategory {
         return dao.getSelectedMeditation(id)
     }
 
 
-    //Yoga Related
+    /**
+     *Yoga Related
+     */
     suspend fun deleteYogaList() {
         dao.deleteYogaList()
     }
@@ -71,7 +80,9 @@ class RoomRepositories(private val dao: AppDao) {
     }
 
 
-    //Blog Related
+    /**
+     *Blog Related
+     */
     suspend fun deleteBlogList() {
         dao.deleteBlogList()
     }
@@ -90,4 +101,5 @@ class RoomRepositories(private val dao: AppDao) {
     suspend fun getSelectedBlog(id: Int): Blog {
         return dao.getSelectedBlog(id)
     }
+
 }

@@ -5,7 +5,7 @@
     tools:context=".ui.view.home.blog.BlogDetailFragment">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="selectedPost"
             type="com.osmancancinar.yogaapp.data.model.Blog" />
@@ -13,18 +13,109 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            downloadPostImage="@{selectedPost}"
-            android:layout_width="220dp"
-            android:layout_height="250dp" />
+        <ScrollView
+            android:id="@+id/blog_detail_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
 
-        <TextView
-            postTitle="@{selectedPost}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/blog_cardView_image"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/blogGuideLineTop"
+                    app:layout_constraintEnd_toEndOf="@id/blogGuideLineEnd"
+                    app:layout_constraintStart_toStartOf="@id/blogGuideLineStart"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/blogFirstImage"
+                        app:downloadPostImage="@{selectedPost}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/blogGuideLineTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.35" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/blogGuideLineStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/blogGuideLineEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.9" />
+
+                <TextView
+                    android:id="@+id/postTitle"
+                    app:postTitle="@{selectedPost}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/semi_bold"
+                    android:lines="2"
+                    android:padding="3dp"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="@id/blogGuideLineEnd"
+                    app:layout_constraintStart_toStartOf="@id/blogGuideLineStart"
+                    app:layout_constraintTop_toBottomOf="@id/blogGuideLineTop" />
+
+                <TextView
+                    android:id="@+id/blogFirstContent"
+                    app:firstPostContent="@{selectedPost}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/regular"
+                    android:textColor="@color/lightest_color"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@id/blogGuideLineEnd"
+                    app:layout_constraintStart_toStartOf="@id/blogGuideLineStart"
+                    app:layout_constraintTop_toBottomOf="@id/postTitle" />
+
+
+                <TextView
+                    android:id="@+id/blogSecondContent"
+                    app:secondPostContent="@{selectedPost}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/regular"
+                    android:textColor="@color/lightest_color"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@id/blogGuideLineEnd"
+                    app:layout_constraintStart_toStartOf="@id/blogGuideLineStart"
+                    app:layout_constraintTop_toBottomOf="@id/blogFirstContent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </LinearLayout>
-
 </layout>

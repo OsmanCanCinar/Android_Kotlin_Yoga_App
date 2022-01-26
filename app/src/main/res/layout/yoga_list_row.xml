@@ -23,83 +23,111 @@
             android:id="@+id/yoga_cardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/light_color"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@android:color/transparent"
             android:clickable="true"
-            android:elevation="7dp"
             android:focusable="true"
-            android:onClick="@{() -> listener.onClick(yoga)}">
+            android:onClick="@{() -> listener.onClick(yoga)}"
+            app:cardElevation="0dp"
+            tools:backgroundTint="@color/reddish_color">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="230dp">
 
                 <TextView
                     android:id="@+id/yoga_title"
                     yogaName="@{yoga}"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginStart="12dp"
                     android:fontFamily="@font/semi_bold"
-                    android:lines="2"
-                    android:padding="5dp"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@id/yoga_desc"
-                    app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="start"
+                    android:lines="1"
+                    android:textColor="@color/reddish_color"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toStartOf="@id/verticalGuidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/verticalGuidelineMiddle"
+                    app:layout_constraintTop_toTopOf="@id/verticalGuidelineTop"
                     tools:text="yoga video 1" />
 
                 <TextView
                     android:id="@+id/yoga_desc"
                     yogaDesc="@{yoga}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/medium_italic"
-                    android:lines="2"
+                    android:gravity="start"
+                    android:lines="7"
                     android:padding="5dp"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toTopOf="@id/yoga_length"
-                    app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/verticalGuidelineBottom"
+                    app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/verticalGuidelineMiddle"
                     app:layout_constraintTop_toBottomOf="@id/yoga_title"
                     tools:text="This is a yoga video." />
 
-                <TextView
-                    android:id="@+id/yoga_length"
-                    yogaLength="@{yoga}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/semi_bold"
-                    android:lines="2"
-                    android:padding="5dp"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/verticalGuideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/yoga_desc"
-                    tools:text="9.32 min" />
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/verticalGuideline"
+                    android:id="@+id/verticalGuidelineStart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+                    app:layout_constraintGuide_percent="0.05" />
 
-                <ImageView
-                    android:id="@+id/yogaCover"
-                    downloadYogaCover="@{yoga}"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_image"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/verticalGuideline"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/verticalGuidelineMiddle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.45" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/verticalGuidelineEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.9" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/verticalGuidelineTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/verticalGuidelineBottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.9" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/yoga_cardView_image"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/verticalGuidelineBottom"
+                    app:layout_constraintEnd_toEndOf="@id/verticalGuidelineMiddle"
+                    app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+                    app:layout_constraintTop_toTopOf="@id/verticalGuidelineTop">
+
+                    <ImageView
+                        android:id="@+id/yogaCover"
+                        downloadYogaCover="@{yoga}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_image" />
+                </androidx.cardview.widget.CardView>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

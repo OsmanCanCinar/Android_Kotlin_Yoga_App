@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="meditationCategory"
             type="com.osmancancinar.yogaapp.data.model.MeditationCategory" />
@@ -24,32 +23,71 @@
             android:id="@+id/linearMeditationCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:clickable="true"
+            android:layout_marginBottom="20dp"
             android:elevation="7dp"
             android:focusable="true"
             android:onClick="@{() -> listener.onClick(meditationCategory)}"
             app:cardCornerRadius="15dp"
-            app:meditationColor="@{meditationCategory}">
+            app:meditationColor="@{meditationCategory}"
+            tools:backgroundTint="@color/grayish_color">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
+                android:layout_height="330dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/meditation_guideline_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/meditation_list_guideline_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.15" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/meditation_list_guideline_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.85" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/meditation_guideline_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.95" />
+
+                <ImageView
+                    android:id="@+id/meditation_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lotus"
+                    app:layout_constraintEnd_toStartOf="@id/meditation_list_guideline_end"
+                    app:layout_constraintStart_toEndOf="@id/meditation_list_guideline_start"
+                    app:layout_constraintTop_toBottomOf="@id/meditation_guideline_top"
+                    app:layout_constraintBottom_toTopOf="@id/meditation_category_row_title"/>
 
                 <TextView
                     android:id="@+id/meditation_category_row_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/semi_bold"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="15dp"
                     android:lines="2"
-                    android:padding="5dp"
                     android:textColor="@color/lightest_color"
                     android:textSize="25sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toStartOf="@id/meditation_list_guideline_end"
+                    app:layout_constraintStart_toEndOf="@id/meditation_list_guideline_start"
+                    app:layout_constraintTop_toBottomOf="@id/meditation_icon"
+                    app:layout_constraintBottom_toTopOf="@id/meditation_category_row_desc"
                     app:meditationTitle="@{meditationCategory}"
                     tools:text="title" />
 
@@ -58,13 +96,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/medium_italic"
-                    app:layout_constraintTop_toBottomOf="@id/meditation_category_row_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_margin="10dp"
-                    android:lines="2"
-                    android:padding="5dp"
+                    android:lines="3"
                     android:textColor="@color/lightest_color"
                     android:textSize="20sp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@id/meditation_category_row_length"
+                    app:layout_constraintEnd_toStartOf="@id/meditation_list_guideline_end"
+                    app:layout_constraintStart_toEndOf="@id/meditation_list_guideline_start"
+                    app:layout_constraintTop_toBottomOf="@id/meditation_category_row_title"
                     app:meditationdesc="@{meditationCategory}"
                     tools:text="desc" />
 
@@ -73,31 +112,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/semi_bold"
-                    app:layout_constraintTop_toBottomOf="@id/meditation_category_row_desc"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_margin="10dp"
-                    app:layout_constraintEnd_toStartOf="@id/meditation_category_meditationID"
-                    android:lines="2"
-                    android:padding="5dp"
+                    android:lines="1"
                     android:textColor="@color/lightest_color"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="@id/meditation_guideline_bottom"
+                    app:layout_constraintEnd_toStartOf="@id/meditation_list_guideline_end"
+                    app:layout_constraintStart_toEndOf="@id/meditation_list_guideline_start"
+                    app:layout_constraintTop_toBottomOf="@id/meditation_category_row_desc"
                     app:meditationLength="@{meditationCategory}"
-                    tools:text="length" />
-
-                <TextView
-                    android:id="@+id/meditation_category_meditationID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/meditation_category_row_length"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/meditation_category_row_desc"
-                    android:layout_margin="10dp"
-                    android:lines="2"
-                    android:textColor="@color/lightest_color"
-                    android:padding="5dp"
-                    android:fontFamily="@font/semi_bold"
-                    android:textSize="20sp"
-                    app:meditationId="@{meditationCategory}"
                     tools:text="length" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

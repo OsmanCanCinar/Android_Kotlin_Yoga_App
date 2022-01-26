@@ -139,6 +139,21 @@ fun TextView.setPostTitle(item: Blog?) {
     }
 }
 
+@BindingAdapter("firstPostContent")
+fun TextView.setFirstPostContent(item: Blog?) {
+    item?.let {
+        text = it.firstContent
+    }
+}
+
+
+@BindingAdapter("secondPostContent")
+fun TextView.setSecondPostContent(item: Blog?) {
+    item?.let {
+        text = it.secondContent
+    }
+}
+
 @BindingAdapter("downloadPostImage")
 fun downloadYogaCover(image: ImageView, item: Blog?) {
     item?.let {

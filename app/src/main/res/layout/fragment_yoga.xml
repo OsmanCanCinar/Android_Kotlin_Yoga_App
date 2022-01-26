@@ -10,17 +10,18 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutYoga"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
         android:paddingHorizontal="10dp"
         app:tabGravity="center"
+        android:elevation="0dp"
         app:tabIndicator="@drawable/yoga_tab_indicator"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/light_color"
         app:tabIndicatorGravity="stretch"
         app:tabMode="auto"
         app:tabSelectedTextColor="@color/lightest_color"
-        app:tabTextColor="@color/grayish_color">
+        app:tabTextColor="@color/light_color">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

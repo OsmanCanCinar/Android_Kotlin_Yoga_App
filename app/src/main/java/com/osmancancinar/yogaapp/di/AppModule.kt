@@ -21,11 +21,13 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
+
     @Singleton
     @Provides
     fun provideBaseApplication(@ApplicationContext app: Context): BaseApplication {
         return app as BaseApplication
     }
+
 
     @Singleton
     @Provides
@@ -34,6 +36,7 @@ object AppModule {
         return app
     }
 
+
     @Singleton
     @Provides
     @Named("Repositories")
@@ -41,12 +44,14 @@ object AppModule {
         return repository
     }
 
+
     @Singleton
     @Provides
     @Named("Source")
     fun provideSource(source: FirebaseSource): FirebaseSource {
         return source
     }
+
 
     @Singleton
     @Provides

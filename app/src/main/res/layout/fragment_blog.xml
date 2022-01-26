@@ -6,16 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.home.blog.BlogFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/blog_guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/blog_List"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:padding="10dp"
+        android:paddingHorizontal="10dp"
+        android:layout_marginHorizontal="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/blog_guideline_Bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/blog_guideline_top" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/blog_guideline_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

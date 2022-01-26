@@ -17,6 +17,8 @@
     <color name="light_color">#FDD5B0</color>
     <color name="reddish_color">#FF747D</color>
     <color name="grayish_color">#32594F</color>
+    <color name="dark_color">#283655</color>
+    <color name="dark_green">#192112</color>
 
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>

@@ -19,7 +19,7 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAuthBinding.inflate(layoutInflater)
-        setTheme(R.style.Theme_YogaApp)
+        setTheme(R.style.Theme_YogaApp_Auth)
         setContentView(binding.root)
 
         setSupportActionBar(binding.authToolbar)

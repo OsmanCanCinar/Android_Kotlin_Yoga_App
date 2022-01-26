@@ -31,21 +31,20 @@ class FirebaseSource @Inject constructor(
 ) // :CoroutineScope {
 {
 
-    /*
-                                            FIREBASE-AUTH RELATED
+    /**
+     *FIREBASE-AUTH RELATED
 
-        We are using Completable that is an RxJava class. Completable basically means it holds something that
-        will complete and we can get an indication when it is completed or failed. And it is the perfect class
-        to use with FirebaseAuth because auth is a network operation that will complete and we need to know if
-        it is completed or failed.
+     *We are using Completable that is an RxJava class. Completable basically means it holds something that
+    will complete and we can get an indication when it is completed or failed. And it is the perfect class
+    to use with FirebaseAuth because auth is a network operation that will complete and we need to know if
+    it is completed or failed.
 
-        So here we are creating a Completable and inside the completable we are performing the authentication
-        and firebase reads-writes. Once it is completed we are using the emitter to indicated that the task is
-        completed or failed.
+     *So here we are creating a Completable and inside the completable we are performing the authentication
+    and firebase reads-writes. Once it is completed we are using the emitter to indicated that the task is
+    completed or failed.
 
-        We are also using lazy to create only one instance of some of our val values to be accessed from cache memory.
+     *We are also using lazy to create only one instance of some of our val values to be accessed from cache memory.
      */
-
 
     //By lazy, we don't initialize firebaseAuth till we use it.
     val firebaseAuth: FirebaseAuth by lazy {
@@ -153,8 +152,9 @@ class FirebaseSource @Inject constructor(
         }
 
 
-    //FIREBASE-FIRESTORE RELATED
-
+    /**
+     *FIREBASE-FIRESTORE RELATED
+     */
     //By lazy, when database variable is reused, we will get it from cache memory.
     private val firebaseFireStore: FirebaseFirestore by lazy {
         FirebaseFirestore.getInstance()
